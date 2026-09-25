@@ -1,0 +1,38 @@
+import {
+    useForm as useInertiaForm,
+} from "@inertiajs/react";
+export default function UseMobileBankingInertiaForm() {
+    return useInertiaForm({
+        request_type: "",
+        title: "",
+        first_name: "",
+        surname: "",
+        id_type: "",
+        id_number: "",
+        cell_phone: "",
+        sacc_number_employment: "",
+        email: "",
+        postal_address: "",
+        add_mobile_number: false,
+        remove_mobile_number: false,
+        mobile_1_number: "",
+        mobile_1_sms_notification: "",
+        mobile_2_number: "",
+        mobile_2_sms_notification: "",
+        balance_savings: false,
+        balance_loans: false,
+        balance_other: false,
+        balance_other_specify: "",
+        funds_transfer: false,
+        declaration_accepted: false,
+        signature: "",
+        declaration_date: "",
+        member_customer_number: "",
+        received_by: "",
+        received_date: "",
+        approved_by: "",
+        approved_date: "",
+        processed_by: "",
+        processed_date: "",
+    });
+}

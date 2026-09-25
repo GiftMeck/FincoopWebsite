@@ -1,0 +1,46 @@
+import {
+    Check,
+    ChevronLeft,
+    ChevronRight,
+    FileCheck2,
+    UserRound,
+    Users,
+    Fingerprint,
+    BookOpen,
+    MapPin,
+    Shield,
+    Heart,
+    Handshake,
+    Crown,
+    AlertCircle,
+    UserPlus,
+    Sparkles,
+    BadgeCheck,
+    Building2,
+} from "lucide-react";
+export const steps = [
+        {
+            number: 1,
+            title: "Personal",
+            description: "Your details",
+            icon: UserRound,
+        },
+        {
+            number: 2,
+            title: "Address",
+            description: "Where you live",
+            icon: Building2,
+        },
+        {
+            number: 3,
+            title: "Referees",
+            description: "Your referees",
+            icon: Users,
+        },
+        {
+            number: 4,
+            title: "Review",
+            description: "Confirm & submit",
+            icon: Shield,
+        },
+    ];
