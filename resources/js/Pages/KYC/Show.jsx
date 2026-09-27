@@ -33,13 +33,6 @@ import {
     BadgeCheck,
 } from "lucide-react";
 
-
-/*
-|--------------------------------------------------------------------------
-| Zod Schema — Only the official-use fields
-|--------------------------------------------------------------------------
-*/
-
 const kycCheckSchema = z.object({
     cross_checked_comments: z.string().optional(),
     completed_by: z.string().optional(),
@@ -55,12 +48,6 @@ const kycCheckSchema = z.object({
 
 export default function KYCShow() {
     const { kycApplicant } = usePage().props;
-
-    /*
-    |--------------------------------------------------------------------------
-    | React Hook Form — only for official-use fields
-    |--------------------------------------------------------------------------
-    */
     const form = useReactHookForm({
         resolver: zodResolver(kycCheckSchema),
         mode: "onChange",
@@ -76,12 +63,6 @@ export default function KYCShow() {
             branch_manager_name: "",
         },
     });
-
-    /*
-    |--------------------------------------------------------------------------
-    | Inertia Form — for submission
-    |--------------------------------------------------------------------------
-    */
     const inertiaForm = useInertiaForm({
         cross_checked_comments: "",
         completed_by: "",
@@ -95,12 +76,6 @@ export default function KYCShow() {
     });
 
     const [processing, setProcessing] = useState(false);
-
-    /*
-    |--------------------------------------------------------------------------
-    | Submit — Approve & Complete
-    |--------------------------------------------------------------------------
-    */
     const submitApplication = (values) => {
         setProcessing(true);
 
@@ -175,7 +150,7 @@ export default function KYCShow() {
                         <Button
                             type="button"
                             variant="outline"
-                            onClick={() => router.visit(route("kyc.index"))}
+                            onClick={() => router.visit(route("dashboard"))}
                             className="
                                 h-11
                                 rounded-xl

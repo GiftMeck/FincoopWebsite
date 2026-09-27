@@ -5,7 +5,7 @@ import { Smartphone } from "lucide-react";
 import { BadgeCheck } from "lucide-react";
 import { TrendingUp } from "lucide-react";
 import { User } from "lucide-react";
-import { Briefcase, ChevronDown, ArrowRight, Shield, Star, Users, Clock, Award, Heart, Handshake, Crown, Sparkles, CircleCheck, Building2, FileCheck2, WalletCards, Landmark, ClipboardCheck, UserRound, Mail, Phone, MapPin, IdCard } from "lucide-react";
+import { Briefcase, ChevronDown, ArrowRight, Shield, Star, Users, Clock, Award, Heart, Handshake, Crown, Sparkles, CircleCheck, Building2, FileCheck2, WalletCards, ShieldCheck, Landmark, ClipboardCheck, UserRound, Mail, Phone, MapPin, IdCard } from "lucide-react";
 import Create from "./customers/Create";
 import { Head, Link, usePage } from '@inertiajs/react';
 import { motion, AnimatePresence, useAnimation } from 'framer-motion';
@@ -20,11 +20,10 @@ export default function Welcome({ serviceCategories }) {
     const financialBenefits = usePage().props.financialBenefits ?? [];
     const vertsData = usePage().props.verts ?? [];
     const feedback = usePage().props.feedback ?? [];
-    console.log(financialBenefits);
     const financialBenefitsIcons = [
         <BadgeDollarSign className="size-20 text-green-700" />,
         <HandCoins className="size-20 text-green-700" />,
-        <PiggyBank className="size-20 text-green-700" />,
+        <ShieldCheck className="size-20 text-green-700" />,
         <Smartphone className="size-20 text-green-700" />,
         <BadgeCheck className="size-20 text-green-700" />,
         <TrendingUp className="size-20 text-green-700" />
@@ -119,7 +118,6 @@ export default function Welcome({ serviceCategories }) {
                                     transition={{ duration: 1, ease: "easeInOut" }}
                                     className="absolute inset-0 grid grid-cols-1 lg:grid-cols-2 rounded-3xl overflow-hidden shadow-2xl"
                                 >
-                                    {/* Image Side */}
                                     <div className="relative order-1 h-[320px] sm:h-[420px] md:h-[500px] lg:h-full overflow-hidden">
                                         <img
                                             src={`storage/${vert.advert_image}`}
@@ -134,7 +132,7 @@ export default function Welcome({ serviceCategories }) {
                                                 transition={{ duration: 0.8 }}
                                                 className="mb-3 rounded-full border border-white/20 bg-white/10 px-4 py-1.5 text-xs font-bold uppercase tracking-wider backdrop-blur-sm"
                                             >
-                                                Featured
+                                                Stay Updated
                                             </motion.div>
                                             <motion.h2
                                                 initial={{ opacity: 0, y: 30 }}
@@ -160,8 +158,6 @@ export default function Welcome({ serviceCategories }) {
                                             </motion.p>
                                         </div>
                                     </div>
-
-                                    {/* CTA Side */}
                                     <div className="
                                         flex
                                         items-center
@@ -181,9 +177,6 @@ export default function Welcome({ serviceCategories }) {
                                         text-white
                                     ">
                                         <div className="max-w-xl text-center flex flex-col items-center">
-                                            <div className="mb-4 rounded-full border border-green-500/30 bg-green-800/40 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-green-300 backdrop-blur-sm">
-                                                Join Our Community
-                                            </div>
                                             <h2 className="
                                                 text-3xl
                                                 sm:text-4xl
@@ -594,14 +587,9 @@ export default function Welcome({ serviceCategories }) {
                 </div>
                 <div className="mt-16">
                     <div className="mb-8 text-center">
-                        <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-green-800">
-                            <Briefcase className="size-3.5" />
-                            Our Offerings
-                        </div>
                         <h2 className="text-3xl font-bold text-green-900 sm:text-4xl">
                             Overview Of Our Services And Products
                         </h2>
-                        <div className="mx-auto mt-3 h-1 w-24 rounded-full bg-orange-500"></div>
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
@@ -665,8 +653,6 @@ export default function Welcome({ serviceCategories }) {
                                 </p>
                             </div>
                         </div>
-
-                        {/* RIGHT SIDE - Accordion */}
                         <div>
                             <div className="space-y-3">
                                 {serviceCategoriesData?.map((category) => {
@@ -820,7 +806,6 @@ export default function Welcome({ serviceCategories }) {
                         <h2 className="text-3xl font-bold text-green-900 sm:text-4xl">
                             Why We Stand Out ?
                         </h2>
-                        <div className="mx-auto mt-3 h-1 w-24 rounded-full bg-orange-500"></div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 lg:gap-8">
@@ -851,13 +836,13 @@ export default function Welcome({ serviceCategories }) {
                                     bg-gradient-to-br
                                     from-green-800
                                     to-green-900
-                                    p-6
+                                    p-8
                                     text-white
                                 ">
                                     <div className="
                                         flex
-                                        h-20
-                                        w-20
+                                        h-10
+                                        w-10
                                         items-center
                                         justify-center
                                         rounded-full
@@ -904,10 +889,6 @@ export default function Welcome({ serviceCategories }) {
                             )}
 
                             <div className="mb-4">
-                                <div className="inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-green-800">
-                                    <Users className="size-3.5" />
-                                    Testimonials
-                                </div>
                                 <h2 className="mt-2 text-3xl font-bold text-green-900 sm:text-4xl">
                                     What People Say About Us
                                 </h2>

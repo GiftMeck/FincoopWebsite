@@ -158,12 +158,6 @@ export default function LoanShow() {
             }
         );
     };
-
-    /*
-    |--------------------------------------------------------------------------
-    | Helpers
-    |--------------------------------------------------------------------------
-    */
     const value = (v) =>
         v === null || v === undefined || v === "" ? "—" : v;
 
@@ -181,15 +175,11 @@ export default function LoanShow() {
                 lg:px-8
             ">
                 <div className="mx-auto w-full max-w-6xl">
-
-                    {/* =====================================================
-                        BACK BUTTON + HEADER
-                    ===================================================== */}
                     <div className="mb-6 flex items-center justify-between">
                         <Button
                             type="button"
                             variant="outline"
-                            onClick={() => router.visit(route("loanapplications.index"))}
+                            onClick={() => router.visit(route("dashboard"))}
                             className="
                                 h-11
                                 rounded-xl
@@ -227,10 +217,6 @@ export default function LoanShow() {
                             Official Loan Review
                         </div>
                     </div>
-
-                    {/* =====================================================
-                        APPLICANT DETAILS (read-only)
-                    ===================================================== */}
                     <Card className="
                         mb-8
                         overflow-hidden
@@ -257,8 +243,6 @@ export default function LoanShow() {
                         </CardHeader>
 
                         <CardContent className="space-y-8 px-6 py-8 sm:px-8 lg:px-10">
-
-                            {/* ---------- PERSONAL DETAILS ---------- */}
                             <SectionBlock icon={UserRound} title="Personal Details">
                                 <DetailItem label="Account Number" value={value(loanApplicant.account_number)} />
                                 <DetailItem label="Employment Number" value={value(loanApplicant.employment_number)} />
@@ -277,8 +261,6 @@ export default function LoanShow() {
                                 <DetailItem label="Physical Address" value={value(loanApplicant.physical_address)} />
                                 <DetailItem label="Mailing Address" value={value(loanApplicant.mailing_address)} />
                             </SectionBlock>
-
-                            {/* ---------- LOAN DETAILS ---------- */}
                             <SectionBlock icon={WalletCards} title="Loan Details">
                                 <DetailItem label="Loan Type" value={value(loanApplicant.loanapplication_type)} />
                                 <DetailItem label="Loan Amount" value={value(loanApplicant.loanapplication_amount)} />
@@ -301,8 +283,6 @@ export default function LoanShow() {
                                 <DetailItem label="Years in Business" value={value(loanApplicant.years_in_business)} />
                                 <DetailItem label="Trading Area" value={value(loanApplicant.trading_area)} />
                             </SectionBlock>
-
-                            {/* ---------- FINANCIAL INFORMATION ---------- */}
                             <SectionBlock icon={Landmark} title="Financial Information">
                                 <DetailItem label="Shares Balance" value={value(loanApplicant.shares_balance)} />
                                 <DetailItem label="Savings Balance" value={value(loanApplicant.savings_balance)} />
@@ -312,10 +292,6 @@ export default function LoanShow() {
 
                         </CardContent>
                     </Card>
-
-                    {/* =====================================================
-                        OFFICIAL USE FORM
-                    ===================================================== */}
                     <div className="
                         rounded-2xl
                         border-2
@@ -352,10 +328,6 @@ export default function LoanShow() {
                         </div>
 
                         <form onSubmit={form.handleSubmit(submitApplication)} noValidate>
-
-                            {/* =============================================
-                                EMPLOYMENT VERIFICATION
-                            ============================================= */}
                             <div className="mb-8 rounded-xl border border-gray-200 bg-white p-5">
                                 <h4 className="
                                     mb-4
@@ -391,10 +363,6 @@ export default function LoanShow() {
                                     />
                                 </div>
                             </div>
-
-                            {/* =============================================
-                                RECOMMENDATION (Credit Officer)
-                            ============================================= */}
                             <div className="mb-8 rounded-xl border border-gray-200 bg-white p-5">
                                 <h4 className="
                                     mb-4
@@ -434,10 +402,6 @@ export default function LoanShow() {
                                     />
                                 </FieldGroup>
                             </div>
-
-                            {/* =============================================
-                                BRANCH MANAGER
-                            ============================================= */}
                             <div className="mb-8 rounded-xl border border-gray-200 bg-white p-5">
                                 <h4 className="
                                     mb-4
@@ -462,10 +426,6 @@ export default function LoanShow() {
                                     />
                                 </FieldGroup>
                             </div>
-
-                            {/* =============================================
-                                CREDIT COMMITTEE
-                            ============================================= */}
                             <div className="mb-8 rounded-xl border border-gray-200 bg-white p-5">
                                 <h4 className="
                                     mb-4
@@ -499,10 +459,6 @@ export default function LoanShow() {
                                     />
                                 </FieldGroup>
                             </div>
-
-                            {/* =============================================
-                                ACTION BUTTONS
-                            ============================================= */}
                             <div className="
                                 mt-8
                                 flex
@@ -575,11 +531,6 @@ export default function LoanShow() {
         </>
     );
 }
-
-
-/* ========================================================================
-   Helper components
-   ======================================================================== */
 
 function SectionBlock({ icon: Icon, title, children }) {
     return (

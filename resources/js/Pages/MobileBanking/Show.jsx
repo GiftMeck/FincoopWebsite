@@ -35,13 +35,6 @@ import {
     Fingerprint,
 } from "lucide-react";
 
-
-/*
-|--------------------------------------------------------------------------
-| Zod Schema — Only the official-use fields
-|--------------------------------------------------------------------------
-*/
-
 const optionalNumber = z.preprocess(
     (v) => (v === "" || v === null || v === undefined ? undefined : Number(v)),
     z.number().min(0).optional()
@@ -61,12 +54,6 @@ const mobileBankingCheckSchema = z.object({
 
 export default function MobileBankingShow() {
     const { mobileBankingApplicant } = usePage().props;
-
-    /*
-    |--------------------------------------------------------------------------
-    | React Hook Form — official fields only
-    |--------------------------------------------------------------------------
-    */
     const form = useReactHookForm({
         resolver: zodResolver(mobileBankingCheckSchema),
         mode: "onChange",
@@ -81,12 +68,6 @@ export default function MobileBankingShow() {
             status: "",
         },
     });
-
-    /*
-    |--------------------------------------------------------------------------
-    | Inertia Form
-    |--------------------------------------------------------------------------
-    */
     const inertiaForm = useInertiaForm({
         member_customer_number: "",
         received_by: "",
@@ -100,11 +81,6 @@ export default function MobileBankingShow() {
 
     const [processing, setProcessing] = useState(false);
 
-    /*
-    |--------------------------------------------------------------------------
-    | Approve & Complete
-    |--------------------------------------------------------------------------
-    */
     const submitApplication = (values) => {
         setProcessing(true);
 
@@ -125,11 +101,7 @@ export default function MobileBankingShow() {
         );
     };
 
-    /*
-    |--------------------------------------------------------------------------
-    | Disapprove
-    |--------------------------------------------------------------------------
-    */
+  
     const rejectApplication = () => {
         if (!confirm("Are you sure you want to disapprove this mobile banking application?")) {
             return;
@@ -151,11 +123,7 @@ export default function MobileBankingShow() {
         );
     };
 
-    /*
-    |--------------------------------------------------------------------------
-    | Helpers
-    |--------------------------------------------------------------------------
-    */
+
     const value = (v) =>
         v === null || v === undefined || v === "" ? "—" : v;
 
@@ -181,15 +149,11 @@ export default function MobileBankingShow() {
                 lg:px-8
             ">
                 <div className="mx-auto w-full max-w-6xl">
-
-                    {/* =====================================================
-                        BACK BUTTON + HEADER
-                    ===================================================== */}
                     <div className="mb-6 flex items-center justify-between">
                         <Button
                             type="button"
                             variant="outline"
-                            onClick={() => router.visit(route("mobile-banking.index"))}
+                            onClick={() => router.visit(route("dashboard"))}
                             className="
                                 h-11
                                 rounded-xl
@@ -227,10 +191,6 @@ export default function MobileBankingShow() {
                             Official Mobile Banking Review
                         </div>
                     </div>
-
-                    {/* =====================================================
-                        APPLICANT DETAILS (read-only)
-                    ===================================================== */}
                     <Card className="
                         mb-8
                         overflow-hidden
@@ -298,10 +258,6 @@ export default function MobileBankingShow() {
                             </SectionBlock>
                         </CardContent>
                     </Card>
-
-                    {/* =====================================================
-                        OFFICE USE FORM
-                    ===================================================== */}
                     <div className="
                         rounded-2xl
                         border-2
@@ -472,11 +428,6 @@ export default function MobileBankingShow() {
         </>
     );
 }
-
-
-/* ========================================================================
-   Helper components
-   ======================================================================== */
 
 function SectionBlock({ icon: Icon, title, children }) {
     return (

@@ -55,14 +55,6 @@ export default function ReadMore() {
                             ">
                                 Types of Loans
                             </h2>
-                            <div className="
-                                mx-auto
-                                mt-3
-                                h-1
-                                w-20
-                                rounded-full
-                                bg-orange-500
-                            " />
                             <p className="
                                 mx-auto
                                 mt-4
@@ -118,7 +110,6 @@ export default function ReadMore() {
                         mb-14
                         lg:grid-cols-2
                     ">
-                        {/* Membership requirements */}
                         <div className="
                             rounded-2xl
                             border
@@ -184,8 +175,6 @@ export default function ReadMore() {
                                 />
                             </ul>
                         </div>
-
-                        {/* Loan security */}
                         <div className="
                             rounded-2xl
                             border

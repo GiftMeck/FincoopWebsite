@@ -34,12 +34,6 @@ import {
 } from "lucide-react";
 
 
-/*
-|--------------------------------------------------------------------------
-| Zod Schema — Only the official-use fields
-|--------------------------------------------------------------------------
-*/
-
 const optionalNumber = z.preprocess(
     (v) => (v === "" || v === null || v === undefined ? undefined : Number(v)),
     z.number().min(0).optional()
@@ -61,12 +55,6 @@ const membershipCheckSchema = z.object({
 
 export default function MembershipShow() {
     const { membershipApplicant } = usePage().props;
-
-    /*
-    |--------------------------------------------------------------------------
-    | React Hook Form — official fields only
-    |--------------------------------------------------------------------------
-    */
     const form = useReactHookForm({
         resolver: zodResolver(membershipCheckSchema),
         mode: "onChange",
@@ -83,12 +71,6 @@ export default function MembershipShow() {
             approval_status: "",
         },
     });
-
-    /*
-    |--------------------------------------------------------------------------
-    | Inertia Form
-    |--------------------------------------------------------------------------
-    */
     const inertiaForm = useInertiaForm({
         entrance_fee_paid_on: "",
         entrance_fee_amount: "",
@@ -104,11 +86,6 @@ export default function MembershipShow() {
 
     const [processing, setProcessing] = useState(false);
 
-    /*
-    |--------------------------------------------------------------------------
-    | Approve & Complete
-    |--------------------------------------------------------------------------
-    */
     const submitApplication = (values) => {
         setProcessing(true);
 
@@ -128,11 +105,6 @@ export default function MembershipShow() {
         );
     };
 
-    /*
-    |--------------------------------------------------------------------------
-    | Disapprove
-    |--------------------------------------------------------------------------
-    */
     const rejectApplication = () => {
         if (!confirm("Are you sure you want to disapprove this membership application?")) {
             return;
@@ -155,11 +127,6 @@ export default function MembershipShow() {
         );
     };
 
-    /*
-    |--------------------------------------------------------------------------
-    | Helpers
-    |--------------------------------------------------------------------------
-    */
     const value = (v) =>
         v === null || v === undefined || v === "" ? "—" : v;
 
@@ -178,14 +145,11 @@ export default function MembershipShow() {
             ">
                 <div className="mx-auto w-full max-w-6xl">
 
-                    {/* =====================================================
-                        BACK BUTTON + HEADER
-                    ===================================================== */}
                     <div className="mb-6 flex items-center justify-between">
                         <Button
                             type="button"
                             variant="outline"
-                            onClick={() => router.visit(route("memberships.index"))}
+                            onClick={() => router.visit(route("dashboard"))}
                             className="
                                 h-11
                                 rounded-xl
@@ -224,9 +188,6 @@ export default function MembershipShow() {
                         </div>
                     </div>
 
-                    {/* =====================================================
-                        APPLICANT DETAILS (read-only)
-                    ===================================================== */}
                     <Card className="
                         mb-8
                         overflow-hidden
@@ -287,9 +248,6 @@ export default function MembershipShow() {
                         </CardContent>
                     </Card>
 
-                    {/* =====================================================
-                        OFFICIAL USE FORM
-                    ===================================================== */}
                     <div className="
                         rounded-2xl
                         border-2
@@ -414,7 +372,6 @@ export default function MembershipShow() {
                                 />
                             </FieldGroup>
 
-                            {/* ---------- ACTION BUTTONS ---------- */}
                             <div className="
                                 mt-8
                                 flex
@@ -491,11 +448,6 @@ export default function MembershipShow() {
         </>
     );
 }
-
-
-/* ========================================================================
-   Helper components
-   ======================================================================== */
 
 function SectionBlock({ icon: Icon, title, children }) {
     return (
