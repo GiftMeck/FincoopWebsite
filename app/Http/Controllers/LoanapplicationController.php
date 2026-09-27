@@ -15,16 +15,12 @@ class LoanapplicationController extends Controller
         );
     }
 
-
+    public function readmore(){
+        return Inertia::render('Loans/ReadMore');
+    }
     public function store(Request $request)
     {
         $validated = $request->validate([
-
-            /*
-            |--------------------------------------------------------------------------
-            | Personal Information
-            |--------------------------------------------------------------------------
-            */
 
             'account_number' => [
                 'nullable',
@@ -118,13 +114,6 @@ class LoanapplicationController extends Controller
                 'max:30',
             ],
 
-
-            /*
-            |--------------------------------------------------------------------------
-            | loanapplication Information
-            |--------------------------------------------------------------------------
-            */
-
             'loanapplication_type' => [
                 'required',
                 'in:personal,business,agricultural,emergency',
@@ -151,13 +140,6 @@ class LoanapplicationController extends Controller
                 'integer',
                 'min:1',
             ],
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | Employment
-            |--------------------------------------------------------------------------
-            */
 
             'employer_name' => [
                 'nullable',
@@ -208,13 +190,6 @@ class LoanapplicationController extends Controller
                 'boolean',
             ],
 
-
-            /*
-            |--------------------------------------------------------------------------
-            | Business
-            |--------------------------------------------------------------------------
-            */
-
             'years_in_business' => [
                 'nullable',
                 'integer',
@@ -241,13 +216,6 @@ class LoanapplicationController extends Controller
                 'array',
             ],
 
-
-            /*
-            |--------------------------------------------------------------------------
-            | Financial Information
-            |--------------------------------------------------------------------------
-            */
-
             'shares_balance' => [
                 'nullable',
                 'numeric',
@@ -272,13 +240,6 @@ class LoanapplicationController extends Controller
                 'min:0',
             ],
 
-
-            /*
-            |--------------------------------------------------------------------------
-            | Security
-            |--------------------------------------------------------------------------
-            */
-
             'security_offered' => [
                 'nullable',
                 'array',
@@ -288,13 +249,6 @@ class LoanapplicationController extends Controller
                 'nullable',
                 'array',
             ],
-
-
-            /*
-            |--------------------------------------------------------------------------
-            | Declaration
-            |--------------------------------------------------------------------------
-            */
 
             'declaration_accepted' => [
                 'accepted',

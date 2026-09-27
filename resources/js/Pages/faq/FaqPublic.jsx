@@ -34,7 +34,7 @@ export default function FaqPublic() {
             <div className="container bg-gray-100 p-4">
                 <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 bg-white lg:px-8">
                     <div className="p-8 rounded-lg">
-                        <h2 className="text-9xl font-extrabold tracking-widest text-green-800 sm:text-4xl">
+                        <h2 className="md:text-2xl lg:text-4xl font-extrabold tracking-widest text-green-800 text-xl">
                             Frequently Asked Questions
                         </h2>
                         <p className="mt-2 text-lg text-gray-500">

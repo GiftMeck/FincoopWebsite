@@ -235,7 +235,6 @@ export default function Welcome({ serviceCategories }) {
                                                 "
                                             >
                                                 Apply Now
-                                                <Handshake className="size-5" />
                                             </Link>
                                         </div>
                                     </div>
@@ -244,10 +243,6 @@ export default function Welcome({ serviceCategories }) {
                         </AnimatePresence>
                     </div>
                 </div>
-                
-                {/*
-                    QUICK ACTION CARDS
-                */}
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-4 -mt-8 relative z-10">
                     <div className="
                         rounded-2xl
@@ -304,7 +299,6 @@ export default function Welcome({ serviceCategories }) {
                             "
                         >
                             Register Now
-                            <Handshake className="size-4" />
                         </Link>
                     </div>
                     <div className="
@@ -363,7 +357,6 @@ export default function Welcome({ serviceCategories }) {
                             "
                         >
                             Register Now
-                            <Handshake className="size-4" />
                         </Link>
                     </div>
                     <div className="
@@ -485,12 +478,8 @@ export default function Welcome({ serviceCategories }) {
                     </div>
                 </div>
 
-                {/*
-                    FEATURED SECTION
-                */}
                 <div className="mt-16">
                     <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-                        {/* Left - Loan Application CTA */}
                         <div className="
                             flex
                             flex-col
@@ -541,7 +530,7 @@ export default function Welcome({ serviceCategories }) {
                                         Apply Now
                                     </Link>
                                     <Link
-                                        href="#"
+                                        href={route('loanapplications.readmore')}
                                         className="
                                             rounded-xl
                                             border-2
@@ -563,8 +552,6 @@ export default function Welcome({ serviceCategories }) {
                                 </div>
                             </div>
                         </div>
-
-                        {/* Right - FAQ Image */}
                         <Link
                             href={route('faqs.public.index')}
                             className="
@@ -605,9 +592,6 @@ export default function Welcome({ serviceCategories }) {
                         </Link>
                     </div>
                 </div>
-                {/*
-                    SERVICES & PRODUCTS
-                */}
                 <div className="mt-16">
                     <div className="mb-8 text-center">
                         <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-green-800">
@@ -621,7 +605,6 @@ export default function Welcome({ serviceCategories }) {
                     </div>
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        {/* LEFT SIDE - Image Grid */}
                         <div>
                             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-6 rounded-2xl overflow-hidden">
                                 {serviceCategoriesData?.slice(0, 6).map((category) => (
@@ -832,18 +815,10 @@ export default function Welcome({ serviceCategories }) {
                         </div>
                     </div>
                 </div>
-
-                {/*
-                    WHY WE STAND OUT
-                */}
                 <div className="mt-16">
                     <div className="mb-8 text-center">
-                        <div className="mb-2 inline-flex items-center gap-2 rounded-full border border-green-200 bg-green-50 px-4 py-1.5 text-xs font-bold uppercase tracking-wider text-green-800">
-                            <Award className="size-3.5" />
-                            Our Advantages
-                        </div>
                         <h2 className="text-3xl font-bold text-green-900 sm:text-4xl">
-                            Why We Stand Out
+                            Why We Stand Out ?
                         </h2>
                         <div className="mx-auto mt-3 h-1 w-24 rounded-full bg-orange-500"></div>
                     </div>
@@ -919,13 +894,8 @@ export default function Welcome({ serviceCategories }) {
                         ))}
                     </div>
                 </div>
-
-                {/*
-                    FEEDBACK SECTION
-                */}
                 <div className="mt-16">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                        {/* Left - Feedback Display */}
                         <div className="flex flex-col justify-end" id="feedback-form">
                             {showMessage && (
                                 <div className="mb-6 rounded-xl border border-green-300 bg-green-50 p-4 text-green-700 shadow-lg">
@@ -1014,8 +984,6 @@ export default function Welcome({ serviceCategories }) {
                                 ))}
                             </div>
                         </div>
-
-                        {/* Right - Feedback Form */}
                         <div>
                             <div className="
                                 rounded-2xl
@@ -1041,10 +1009,6 @@ export default function Welcome({ serviceCategories }) {
                         </div>
                     </div>
                 </div>
-
-                {/*
-                    FOOTER TRUST BANNER
-                 */}
                 <div className="mt-16 rounded-3xl bg-gradient-to-r from-green-900 to-green-950 p-8 shadow-2xl">
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
                         <div className="flex flex-col items-center">
@@ -1074,10 +1038,6 @@ export default function Welcome({ serviceCategories }) {
                     </div>
                 </div>
             </section>
-
-            {/*
-                SCROLL TO TOP BUTTON
-            */}
             <button
                 onClick={scrollToTop}
                 className={`

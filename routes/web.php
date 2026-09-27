@@ -435,6 +435,7 @@ Route::middleware('auth')->group(function () {
 });
 Route::prefix('loanapplications')->name('loanapplications.')->group(function () {
     Route::get('/', [loanapplicationController::class, 'create'])->name('create');
+    Route::get('/readmore', [loanapplicationController::class, 'readmore'])->name('readmore');
     Route::post('/', [loanapplicationController::class, 'store'])->name('store');
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/{loanApplicant}', [loanapplicationController::class, 'show'])->name('show')->where('loanApplicant', '[0-9]+');

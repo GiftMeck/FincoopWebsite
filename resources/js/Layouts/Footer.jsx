@@ -33,8 +33,7 @@ export default function Footer() {
                     </h2>
 
                     <div className="
-                        grid 
-                        grid-cols-3 
+                        grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 
                         gap-2
                         mt-7
                     ">
@@ -109,8 +108,7 @@ export default function Footer() {
                             DOWNLOAD FORMS
                         </h1>
                         <div className="
-                            grid
-                            grid-cols-2
+                            grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
                             gap-4
                             mt-7
                         ">
@@ -146,7 +144,6 @@ export default function Footer() {
                                             {document.document_name}
 
                                             <Download
-                                                size={18}
                                                 className="
                                                     text-orange-500
                                                     transition-transform
@@ -172,8 +169,7 @@ export default function Footer() {
                         </div>
                         <div
                             className="
-                            grid
-                            grid-cols-3
+                            grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
                             gap-4
                             mt-4
                             bg-green-800/40

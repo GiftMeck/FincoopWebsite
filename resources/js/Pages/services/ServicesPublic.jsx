@@ -56,7 +56,7 @@ export default function ServiceCategoriesPublic() {
                                         </p>
                                     </div>
 
-                                    <div className="grid grid-cols-4 gap-6 sm:grid-cols-4">
+                                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
                                         {category.services && category.services.length != 0 ? category.services.map((service) => (
                                             <Link key={service.service_id} href={route('services.public.show', service.service_id)}>
                                                 <div
