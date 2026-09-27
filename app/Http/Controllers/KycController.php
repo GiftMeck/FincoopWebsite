@@ -310,6 +310,7 @@ class KycController extends Controller
      */
     public function export(Request $request)
     {
+        /*
         $query = Kyc::query();
 
         // Apply filters
@@ -326,7 +327,8 @@ class KycController extends Controller
         }
 
         $kycRecords = $query->get();
-
+    */
+        $kycRecords = Kyc::all();
         $headers = [
             'Content-Type' => 'text/csv',
             'Content-Disposition' => 'attachment; filename="kyc_records_' . date('Y-m-d') . '.csv"',

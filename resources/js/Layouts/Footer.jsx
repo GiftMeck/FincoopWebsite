@@ -39,8 +39,9 @@ export default function Footer() {
                         mt-7
                     ">
 
-                        {branches.map((branch) => (
-                            <div
+                        {branches.data.map((branch) => {
+                            return(
+                                <div
                                 key={branch.branch_id}
                                 className="
                                     flex
@@ -92,7 +93,8 @@ export default function Footer() {
                                     </div>
                                 </div>
                             </div>
-                        ))}
+                            )
+                        })}
 
                     </div>
                 </div>
@@ -113,46 +115,48 @@ export default function Footer() {
                             mt-7
                         ">
                             {documents && (
-                                documents.map((document) => (
-                                    <a
-                                    key={document.document_id}
-                                    href={route('documents.download', {
-                                        document: document.document_id
-                                    })}
-                                    className="
-                                        group
-                                        inline-flex
-                                        items-center
-                                        justify-center
-                                        gap-2
-                                        rounded-lg
-                                        border
-                                        border-green-700/40
-                                        bg-green-800/40
-                                        px-4
-                                        py-2
-                                        text-green-100
-                                        shadow-md
-                                        transition-all
-                                        duration-300
-                                        hover:-translate-y-1
-                                        hover:bg-green-800/60
-                                        hover:shadow-lg
-                                    "
-                                    >
-                                        {document.document_name}
+                                documents.data.map((document) => {
+                                    return (
+                                        <a
+                                        key={document.document_id}
+                                        href={route('documents.download', {
+                                            document: document.document_id
+                                        })}
+                                        className="
+                                            group
+                                            inline-flex
+                                            items-center
+                                            justify-center
+                                            gap-2
+                                            rounded-lg
+                                            border
+                                            border-green-700/40
+                                            bg-green-800/40
+                                            px-4
+                                            py-2
+                                            text-green-100
+                                            shadow-md
+                                            transition-all
+                                            duration-300
+                                            hover:-translate-y-1
+                                            hover:bg-green-800/60
+                                            hover:shadow-lg
+                                        "
+                                        >
+                                            {document.document_name}
 
-                                        <Download
-                                            size={18}
-                                            className="
-                                                text-orange-500
-                                                transition-transform
-                                                duration-300
-                                                group-hover:scale-110
-                                            "
-                                        />
-                                    </a>
-                                ))
+                                            <Download
+                                                size={18}
+                                                className="
+                                                    text-orange-500
+                                                    transition-transform
+                                                    duration-300
+                                                    group-hover:scale-110
+                                                "
+                                            />
+                                        </a>
+                                    )
+                                })
                             )}
                         </div>
                         <div className="mt-7">

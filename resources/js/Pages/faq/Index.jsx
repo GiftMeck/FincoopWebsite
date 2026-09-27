@@ -1,12 +1,11 @@
 import NavBar from "@/Layouts/NavBar";
 import { usePage, Link } from "@inertiajs/react";
-export default function Index({faqs, onEdit, updatedFaqs}) {
-    const Faqs = updatedFaqs || faqs;
+export default function Index({faqs, onEdit}) {
     return (
         <>
             <div className="h-full bg-gray-100 shadow-md w-full flex flex-col border p-4">
                 <h1 className="text-xl text-center font-semibold mb-4">FAQs</h1>
-                {Faqs && Faqs.data.map((faq) =>(
+                {faqs && faqs.data.map((faq) =>(
                     <div key={faq.faq_id}
                         className="flex justify-between bg-white items-center p-4 border-2 border-gray-300 rounded-lg"
                     >
@@ -28,7 +27,7 @@ export default function Index({faqs, onEdit, updatedFaqs}) {
                     </div>
                 ))}
                 <div className="py-4">
-                    {Faqs && (Faqs.links.map((link, index) => (
+                    {faqs && (faqs.links.map((link, index) => (
                         <Link
                             key={index}
                             href={link.url ?? "#"}

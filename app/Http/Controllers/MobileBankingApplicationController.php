@@ -287,25 +287,98 @@ class MobileBankingApplicationController extends Controller
 
             // Headers
             fputcsv($handle, [
-                'ID', 'Full Name', 'Cell Phone', 'SACCO/Employment',
-                'Request Type', 'Status', 'Mobile 1', 'Mobile 2',
-                'Services', 'Declaration Date', 'Created At'
+                    'id',
+                    'cell_phone',
+                    'sacc_number_employment',
+                    'request_type',
+                    'title',
+                    'first_name',
+                    'surname',
+                    'id_type',
+                    'id_number',
+                    'email',
+                    'postal_address',
+
+                    // Linked Mobile Phone
+                    'add_mobile_number',
+                    'remove_mobile_number',
+                    'mobile_1_sms_notification',
+                    'mobile_2_sms_notification',
+
+                    // Services
+                    'balance_savings',
+                    'balance_loans',
+                    'balance_other',
+                    'balance_other_specify',
+                    'funds_transfer',
+
+                    // Declaration
+                    'declaration_accepted',
+                    'declaration_date',
+
+                    // Office Use Only
+                    'member_customer_number',
+                    'received_by',
+                    'received_date',
+                    'approved_by',
+                    'approved_date',
+                    'processed_by',
+                    'processed_date',
+
+                    'status',
+                    'mobile_1_number',
+                    'mobile_2_number',
+                    'selected_services',
+                    'created_at'
             ]);
 
             // Data
             foreach ($applications as $application) {
                 fputcsv($handle, [
-                    $application->id,
-                    $application->full_name,
-                    $application->cell_phone,
-                    $application->sacc_number_employment,
-                    $application->request_type,
-                    $application->status,
-                    $application->mobile_1_number,
+                    // Request & Customer Details
+                    $application->id ?? 'N/A',
+                    $application->cell_phone ?? 'N/A',
+                    $application->sacc_number_employment ?? 'N/A',
+                    $application->request_type ?? 'N/A',
+                    $application->title ?? 'N/A',
+                    $application->first_name ?? 'N/A',
+                    $application->surname ?? 'N/A',
+                    $application->id_type ?? 'N/A',
+                    $application->id_number ?? 'N/A',
+                    $application->email ?? 'N/A',
+                    $application->postal_address ?? 'N/A',
+
+                    // Linked Mobile Phone
+                    $application->add_mobile_number ? 'Yes' : 'No' ?? 'N/A',
+                    $application->remove_mobile_number ? 'Yes' : 'No' ?? 'N/A',
+                    $application->mobile_1_sms_notification ? 'Yes' : 'No' ?? 'N/A',
+                    $application->mobile_2_sms_notification ? 'Yes' : 'No' ?? 'N/A',
+
+                    // Services
+                    $application->balance_savings ? 'Yes' : 'No' ?? 'N/A',
+                    $application->balance_loans ? 'Yes' : 'No' ?? 'N/A',
+                    $application->balance_other ? 'Yes' : 'No' ?? 'N/A',
+                    $application->balance_other_specify ?? 'N/A',
+                    $application->funds_transfer ? 'Yes' : 'No' ?? 'N/A',
+
+                    // Declaration
+                    $application->declaration_accepted ? 'Accepted' : 'Not Accepted' ?? 'N/A',
+                    $application->declaration_date ?? 'N/A',
+
+                    // Office Use Only
+                    $application->member_customer_number ?? 'N/A',
+                    $application->received_by ?? 'N/A',
+                    $application->received_date ?? 'N/A',
+                    $application->approved_by ?? 'N/A',
+                    $application->approved_date ?? 'N/A',
+                    $application->processed_by ?? 'N/A',
+                    $application->processed_date ?? 'N/A',
+                    
+                    $application->status ?? 'N/A',
+                    $application->mobile_1_number ?? 'N/A',
                     $application->mobile_2_number ?? 'N/A',
-                    implode('; ', $application->selected_services),
-                    $application->declaration_date,
-                    $application->created_at,
+                    implode('; ', $application->selected_services) ?? 'N/A',
+                    $application->created_at ?? 'N/A',
                 ]);
             }
 

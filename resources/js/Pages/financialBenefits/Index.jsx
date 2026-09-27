@@ -1,18 +1,61 @@
-export default function Index({financialBenefits}) {
-        return(
-        <div className="flex flex-col">
-            <div className="flex flex-col justify-between items-center">
-                <h1 className="text-2xl font-bold">Financial Benefits</h1>
-                {financialBenefits && (financialBenefits.map((benefit) =>{
-                    return(
-                        <div className="flex flex-col">
-                            <h2 className="text-xl font-bold">{benefit.benefit_name}</h2>
-                            <p className="text-gray-500">{benefit.benefit_description}</p>
-                            <p className="text-gray-500">{benefit.benefit_type}</p>
-                        </div>  
-                    )
-                }))}
+import NavBar from "@/Layouts/NavBar";
+import Create from "./Create";
+import { useState } from "react";
+import {usePage, Link} from "@inertiajs/react";
+export default function Index({financialBenefits, onEdit}) {
+    const ActionSource = usePage().props.ActionSource;
+    return (
+        <>
+            <div className="h-full bg-gray-100 shadow-md w-full flex flex-col border p-4">
+                <h1 className="text-xl text-center font-semibold mb-4">Financial Benefits</h1>
+                {financialBenefits && financialBenefits.data.map((financialBenefit) =>(
+                    <div key={financialBenefit.benefit_id}
+                        className="flex justify-between bg-white items-center p-4 border-2 border-gray-300 rounded-lg"
+                    >
+                        <div>
+                            <span>{financialBenefit.benefit_name}</span>
+                        </div>
+                        <div className="flex justify-end">
+                            <button
+                                onClick={() => onEdit(financialBenefit)}
+                            >
+                                <span className="text-white mx-2 bg-blue-500 rounded-lg p-2">Edit</span>
+                            </button>
+                            <button
+                               
+                            >
+                                <span className="text-white mx-2 bg-red-500 rounded-lg p-2">Delete</span>
+                            </button>
+                        </div>
+                    </div>
+                ))}
+                <div className="py-4">
+                    {financialBenefits && (financialBenefits.links.map((link, index) => (
+                        <Link
+                            key={index}
+                            href={link.url ?? "#"}
+                            preserveScroll
+                            preserveState
+                            className={`
+                                px-4
+                                py-2
+                                rounded-lg
+                                border
+
+                                ${
+                                    link.active
+                                        ? "bg-green-700 text-white"
+                                        : "bg-white text-green-900 hover:bg-green-100"
+                                }
+
+                                ${!link.url ? "pointer-events-none opacity-40" : ""}
+                            `}
+                            dangerouslySetInnerHTML={{ __html: link.label }}
+                        />
+
+                    )))}
+                </div>
             </div>
-        </div>
-    )
+        </>
+    );
 }

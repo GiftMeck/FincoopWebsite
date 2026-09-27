@@ -1,5 +1,6 @@
 import { useForm, Link, usePage } from "@inertiajs/react";
-export default function Create({serviceCategories}) {
+export default function Create() {
+    const {serviceCategories} = usePage().props;
         const { data, setData, post, processing, errors } = useForm({
             benefit_name: '',
             benefit_description: '',
@@ -13,8 +14,8 @@ export default function Create({serviceCategories}) {
         };
     
         return (
-            <div className="p-6 flex justify-center items-center h-screen">
-                <div className="bg-gray-100 rounded shadow-md p-8 flex flex-col w-full max-w-md">
+            <div className="h-full w-full bg-gray-100 border p-4 flex justify-center shadow-md items-center">
+                <div className="rounded px-4 flex flex-col w-full max-w-md">
                     <h1 className="text-xl text-center font-semibold mb-4">Create Financial Benefits</h1>
                     <form onSubmit={submit}>
                         <div className="mb-4 flex flex-col">
@@ -44,7 +45,7 @@ export default function Create({serviceCategories}) {
                             >
                                 <option value="">Select service</option>
 
-                                {serviceCategories && (serviceCategories.map((serviceCategory) => (
+                                {serviceCategories && (serviceCategories.data.map((serviceCategory) => (
                                     <option key={serviceCategory.category_id} value={serviceCategory.category_id}>
                                         {serviceCategory.category_name}
                                     </option>

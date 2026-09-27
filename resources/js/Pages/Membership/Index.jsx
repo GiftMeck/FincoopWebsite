@@ -5,6 +5,14 @@ export default function Membership() {
         <>
             <div>
                 <h1 className="text-xl text-center font-semibold mb-4">Membership Applications</h1>
+                    <div className="flex justify-center mb-4">
+                        <a
+                            href={route('memberships.export')}
+                            className="bg-green-700 text-white font-bold py-2 px-4 rounded"
+                        >
+                            Export to CSV
+                        </a>
+                    </div>
                     <table className="w-full border-collapse">
                         <thead>
                             <tr className="bg-gray-100">

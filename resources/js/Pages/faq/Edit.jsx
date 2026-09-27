@@ -45,20 +45,6 @@ export default function Edit({faq, onUpdate}) {
                 }
             });
         };
-    
-        if (!faq) {
-            return (
-                <div className="bg-gray-100 rounded shadow-md p-8">
-                    <h1 className="text-xl font-semibold mb-4">
-                        Edit Frequently Asked Questions
-                    </h1>
-    
-                    <p className="text-gray-500">
-                        Select a Frequently Asked Question from the list to edit it.
-                    </p>
-                </div>
-            );
-        }
     return(
         <div className="bg-gray-100 rounded shadow-md p-8">
             <div className="text-xl mb-6">

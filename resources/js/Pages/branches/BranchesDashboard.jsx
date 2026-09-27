@@ -1,17 +1,24 @@
 import Create from "./Create";
 import Edit from "./Edit";
 import Index from "./Index";
-
-const BranchesDashboard = ({branches=[]}) => {
+import {usePage} from "@inertiajs/react";
+import { useState } from "react";
+const BranchesDashboard = () => {
+    const {branches} = usePage().props;
+    const [selectedBranch, setSelectedBranch] = useState(null);
+    const [updatedBranches, setUpdatedBranches] = useState(null);
     return(
-        <div className="container">
-            <div className="row">
-                <div className="col-md-12">
-                    <h1>Branches</h1>
-                    <Create />
-                    <Index branches={branches} />
-                    <Edit />
-                </div>
+        <div className="flex flex-col">
+            <div className="flex flex-row justify-between items-center">
+                <Index 
+                    branches={branches}
+                    onEdit={setSelectedBranch}
+                 />
+                <Edit
+                    selectedBranch={selectedBranch}
+                    onUpdate={setUpdatedBranches}
+                 />
+                <Create />
             </div>
         </div>
     )

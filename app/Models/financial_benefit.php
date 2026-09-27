@@ -12,4 +12,7 @@ class financial_benefit extends Model
         'benefit_type',
         'category_id'
     ];
+    public function category(){
+        return $this->belongsTo(serviceCategory::class, 'category_id');
+    }
 }

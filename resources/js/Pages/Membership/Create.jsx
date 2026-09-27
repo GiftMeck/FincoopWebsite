@@ -272,7 +272,6 @@ export default function Create() {
                         ">
                             <span className="inline-flex items-center gap-3">
                                 Join FINCOOP
-                                <Crown className="size-8 text-green-600" />
                             </span>
                         </h1>
 

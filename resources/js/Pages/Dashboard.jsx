@@ -196,12 +196,10 @@ export default function Dashboard() {
                                 testimonials={usePage().props?.testimonials}
                                 customers={usePage().props?.customers}
                                 partners={usePage().props?.partners} />}
-                            {activeTab === 'BRANCHES' && <BranchesDashboard branches={usePage().props?.branches} />}
+                            {activeTab === 'BRANCHES' && <BranchesDashboard/>}
                             {activeTab === 'ROLES' && <RolesDashboard roles={usePage().props?.roles} />}
                             {activeTab === 'CUSTOMERS' && <CustomersDashboard customers={usePage().props?.customers} />}
-                            {activeTab === 'FINANCIAL BENEFITS' && <FinancialBenefitsDashboard 
-                                financialBenefits={usePage().props?.financialBenefits}
-                                serviceCategories={usePage().props?.serviceCategories} />}
+                            {activeTab === 'FINANCIAL BENEFITS' && <FinancialBenefitsDashboard />}
                             {activeTab === 'ADVERTS' && <VertsDashboard verts={usePage().props?.verts} />}
                             {activeTab === 'DOCUMENTS' && <DocumentsDashboard />}
                             {activeTab === 'MEMBERSHIP APPLICATIONS' && <Membership />}

@@ -345,6 +345,7 @@ class GroupMembershipController extends Controller
      */
     public function export(Request $request)
     {
+        /*
         $query = GroupMembership::query();
 
         // Apply filters
@@ -361,7 +362,9 @@ class GroupMembershipController extends Controller
         }
 
         $groupMemberships = $query->get();
+        */
 
+        $groupMemberships = GroupMembership::all();
         $headers = [
             'Content-Type' => 'text/csv',
             'Content-Disposition' => 'attachment; filename="group_memberships_' . date('Y-m-d') . '.csv"',

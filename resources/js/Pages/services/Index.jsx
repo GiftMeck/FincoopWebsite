@@ -2,7 +2,7 @@ import NavBar from "@/Layouts/NavBar";
 import Create from "./Create";
 import { useState } from "react";
 import {usePage, Link} from "@inertiajs/react";
-export default function Index({filteredTabs, routes, services, onEdit}) {
+export default function Index({services, onEdit}) {
     const ActionSource = usePage().props.ActionSource;
     return (
         <>

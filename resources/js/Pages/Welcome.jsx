@@ -20,7 +20,7 @@ export default function Welcome({ serviceCategories }) {
     const financialBenefits = usePage().props.financialBenefits ?? [];
     const vertsData = usePage().props.verts ?? [];
     const feedback = usePage().props.feedback ?? [];
-    
+    console.log(financialBenefits);
     const financialBenefitsIcons = [
         <BadgeDollarSign className="size-20 text-green-700" />,
         <HandCoins className="size-20 text-green-700" />,
@@ -776,7 +776,7 @@ export default function Welcome({ serviceCategories }) {
                                                             {category.category_description}
                                                         </p>
                                                         <Link
-                                                            href="#"
+                                                            href={route('serviceCategories.public.show', category.category_id)}
                                                             className="
                                                                 mt-3
                                                                 inline-flex
@@ -802,7 +802,7 @@ export default function Welcome({ serviceCategories }) {
 
                             <div className="mt-6 flex justify-end">
                                 <Link
-                                    href="#"
+                                    href={route("services.public.index")}
                                     className="
                                         inline-flex
                                         items-center
@@ -939,7 +939,7 @@ export default function Welcome({ serviceCategories }) {
                                     Testimonials
                                 </div>
                                 <h2 className="mt-2 text-3xl font-bold text-green-900 sm:text-4xl">
-                                    What Our Members Say
+                                    What People Say About Us
                                 </h2>
                                 <div className="mt-2 h-1 w-20 rounded-full bg-orange-500"></div>
                             </div>

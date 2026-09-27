@@ -24,14 +24,19 @@ use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\MobileBankingApplicationController;
 use App\Http\Controllers\KycController;
 use App\Http\Controllers\GroupMembershipController;
+use App\Http\Resources\CustomerResource;
 use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('Welcome', [
-        'serviceCategories' => fn() => \App\Models\serviceCategory::all(),
-        'financialBenefits' => fn() => \App\Models\financial_benefit::all(),
-        'verts' => fn() => \App\Models\verts::all(),
-        'branches' => fn() => \App\Models\branch::all(),
-        'feedback' => fn() => \App\Models\customer::paginate(3),
+        'serviceCategories' => fn() => \App\Models\serviceCategory::all()
+        ->map(fn($serviceCategory) => new \App\Http\Resources\serviceCategoryResource($serviceCategory)),
+        'financialBenefits' => fn() => \App\Models\financial_benefit::all()
+        ->map(fn($financialBenefit) => new \App\Http\Resources\FinancialBenefitResource($financialBenefit)),
+        'verts' => fn() => \App\Models\verts::all()
+        ->map(fn($vert) => new \App\Http\Resources\vertResource($vert)),
+        'feedback' => fn() => \App\Models\customer::latest()
+        ->paginate(3)
+        ->through(fn ($customer) => new \App\Http\Resources\CustomerResource($customer)),
         'faqs' => fn() => \App\Models\faq::All()
     ]);
 })->name('welcome.public.index');
@@ -48,10 +53,10 @@ Route::get('/dashboard', function () {
             'contacts' => fn() => App\Models\Contact::all(),
             'partners' => fn() => App\Models\Partner::all(),
             'testimonials' => fn() => App\Models\Testimonial::all(),
-            'branches' => fn() => App\Models\Branch::paginate(3),
+            'branches' => fn() => App\Models\branch::paginate(3),
             'users' => fn() => App\Models\User::paginate(5),
             'roles' => fn() => App\Models\Role::paginate(5),
-            'financialBenefits' => fn() => App\Models\financial_benefit::all(),
+            'financialBenefits' => fn() => App\Models\financial_benefit::paginate(3),
             'verts' => fn() => App\Models\verts::all(),
             'documents' => fn() => App\Models\Document::paginate(5),
             'projects' => fn() => App\Models\Project::all(),
@@ -216,7 +221,7 @@ Route::group(['prefix' => 'service-categories', 'as' => 'serviceCategories.'], f
     Route::get('/{category_id}/edit', [ServiceCategoryController::class, 'edit'])->name('edit');
     Route::put('/{category_id}', [ServiceCategoryController::class, 'update'])->name('update');
     Route::delete('/{category_id}', [ServiceCategoryController::class, 'destroy'])->name('destroy');
-});
+})->middleware('auth');
 Route::group(['prefix' => 'services', 'as' => 'services.'], function () {
     Route::get('/', [ServiceController::class, 'index'])->name('index');
     Route::get('/create', [ServiceController::class, 'create'])->name('create');
@@ -224,7 +229,7 @@ Route::group(['prefix' => 'services', 'as' => 'services.'], function () {
     Route::get('/{service_id}/edit', [ServiceController::class, 'edit'])->name('edit');
     Route::put('/{service_id}', [ServiceController::class, 'update'])->name('update');
     Route::delete('/{service_id}', [ServiceController::class, 'destroy'])->name('destroy');
-});
+})->middleware('auth');
 Route::group(['prefix' => 'about', 'as' => 'about.'], function () {
     Route::get('/', [AboutController::class, 'index'])->name('index');
     Route::get('/create', [AboutController::class, 'create'])->name('create');
@@ -232,7 +237,7 @@ Route::group(['prefix' => 'about', 'as' => 'about.'], function () {
     Route::get('/{about_id}/edit', [AboutController::class, 'edit'])->name('edit');
     Route::put('/{about_id}', [AboutController::class, 'update'])->name('update');
     Route::delete('/{about_id}', [AboutController::class, 'destroy'])->name('destroy');
-});
+})->middleware('auth');
 Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
     Route::get('/', [UserController::class, 'index'])->name('index');
     Route::get('/create', [UserController::class, 'create'])->name('create');
@@ -240,7 +245,7 @@ Route::group(['prefix' => 'staff', 'as' => 'staff.'], function () {
     Route::get('/{staff_id}/edit', [UserController::class, 'edit'])->name('edit');
     Route::put('/{staff_id}', [UserController::class, 'update'])->name('update');
     Route::delete('/{staff_id}', [UserController::class, 'destroy'])->name('destroy');
-});
+})->middleware('auth');
 Route::group(['prefix' => 'customers', 'as' => 'customers.'], function () {
     Route::get('/', [CustomerController::class, 'index'])->name('index');
     Route::get('/create', [CustomerController::class, 'create'])->name('create');
@@ -248,7 +253,7 @@ Route::group(['prefix' => 'customers', 'as' => 'customers.'], function () {
     Route::get('/{customer_id}/edit', [CustomerController::class, 'edit'])->name('edit');
     Route::put('/{customer_id}', [CustomerController::class, 'update'])->name('update');
     Route::delete('/{customer_id}', [CustomerController::class, 'destroy'])->name('destroy');
-});
+})->middleware('auth');
 Route::group(['prefix' => 'roles', 'as' => 'roles.'], function () {
     Route::get('/', [RoleController::class, 'index'])->name('index');
     Route::get('/create', [RoleController::class, 'create'])->name('create');
@@ -256,7 +261,7 @@ Route::group(['prefix' => 'roles', 'as' => 'roles.'], function () {
     Route::get('/{role_id}/edit', [RoleController::class, 'edit'])->name('edit');
     Route::put('/{role_id}', [RoleController::class, 'update'])->name('update');
     Route::delete('/{role_id}', [RoleController::class, 'destroy'])->name('destroy');
-});
+})->middleware('auth');
 Route::group(['prefix' => 'gallery', 'as' => 'gallery.'], function () {
     Route::get('/', [GalleryController::class, 'index'])->name('index');
     Route::get('/create', [GalleryController::class, 'create'])->name('create');
@@ -264,7 +269,7 @@ Route::group(['prefix' => 'gallery', 'as' => 'gallery.'], function () {
     Route::get('/{gallery_id}/edit', [GalleryController::class, 'edit'])->name('edit');
     Route::put('/{gallery_id}', [GalleryController::class, 'update'])->name('update');
     Route::delete('/{gallery_id}', [GalleryController::class, 'destroy'])->name('destroy');
-});
+})->middleware('auth');
 Route::group(['prefix' => 'faq', 'as' => 'faqs.'], function () {
     Route::get('/', [FaqController::class, 'index'])->name('index');
     Route::get('/create', [FaqController::class, 'create'])->name('create');
@@ -272,7 +277,7 @@ Route::group(['prefix' => 'faq', 'as' => 'faqs.'], function () {
     Route::get('/{faq_id}/edit', [FaqController::class, 'edit'])->name('edit');
     Route::put('/{faq_id}', [FaqController::class, 'update'])->name('update');
     Route::delete('/{faq_id}', [FaqController::class, 'destroy'])->name('destroy');
-});
+})->middleware('auth');
 Route::group(['prefix' => 'contact', 'as' => 'contacts.'], function () {
     Route::get('/', [ContactController::class, 'index'])->name('index');
     Route::get('/create', [ContactController::class, 'create'])->name('create');
@@ -280,39 +285,39 @@ Route::group(['prefix' => 'contact', 'as' => 'contacts.'], function () {
     Route::get('/{contact_id}/edit', [ContactController::class, 'edit'])->name('edit');
     Route::put('/{contact_id}', [ContactController::class, 'update'])->name('update');
     Route::delete('/{contact_id}', [ContactController::class, 'destroy'])->name('destroy');
-});
+})->middleware('auth');
 Route::group(['prefix' => 'partners', 'as' => 'partners.'], function () {
     Route::get('/', [PartnerController::class, 'index'])->name('index');
     Route::get('/create', [PartnerController::class, 'create'])->name('create');
     Route::post('/', [PartnerController::class, 'store'])->name('store');
     Route::get('/{partners_id}/edit', [PartnerController::class, 'edit'])->name('edit');
-});
+})->middleware('auth');
 Route::group(['prefix' => 'testimonials', 'as' => 'testimonials.'], function () {
     Route::get('/', [TestimonialController::class, 'index'])->name('index');
     Route::get('/create', [TestimonialController::class, 'create'])->name('create');
     Route::post('/', [TestimonialController::class, 'store'])->name('store');
     Route::get('/{testimonials_id}/edit', [TestimonialController::class, 'edit'])->name('edit');
-});
+})->middleware('auth');
 Route::group(['prefix' => 'branches', 'as' => 'branches.'], function () {
     Route::get('/', [BranchController::class, 'index'])->name('index');
     Route::get('/create', [BranchController::class, 'create'])->name('create');
     Route::post('/', [BranchController::class, 'store'])->name('store');
     Route::get('/{branch_id}/edit', [BranchController::class, 'edit'])->name('edit');
-});
+})->middleware('auth');
 Route::group(['prefix' => 'financialBenefits', 'as' => 'financialBenefits.'], function () {
     Route::get('/', [FinancialBenefitController::class, 'index'])->name('index');
     Route::get('/create', [FinancialBenefitController::class, 'create'])->name('create');
     Route::post('/', [FinancialBenefitController::class, 'store'])->name('store');
     Route::get('/{financialBenefit_id}/edit', [FinancialBenefitController::class, 'edit'])->name('edit'); 
     Route::delete('/{financialBenefit_id}', [FinancialBenefitController::class, 'destroy'])->name('destroy');
-});
+})->middleware('auth');
 Route::group(['prefix' => 'verts', 'as' => 'verts.'], function () {
     Route::get('/', [vertsController::class, 'index'])->name('index');
     Route::get('/create', [vertsController::class, 'create'])->name('create');
     Route::post('/', [vertsController::class, 'store'])->name('store');
     Route::get('/{vert_id}/edit', [vertsController::class, 'edit'])->name('edit');
     Route::delete('/{vert_id}', [vertsController::class, 'destroy'])->name('destroy');
-});
+})->middleware('auth');
 Route::group(['prefix' => 'documents', 'as' => 'documents.'], function () {
     Route::get('/', [DocumentController::class, 'index'])->name('index');
     Route::get('/create', [DocumentController::class, 'create'])->name('create');
@@ -321,24 +326,24 @@ Route::group(['prefix' => 'documents', 'as' => 'documents.'], function () {
     Route::put('/{document_id}/update', [DocumentController::class, 'update'])->name('update'); 
     Route::get('/{document}/download', [DocumentController::class, 'download'])->name('download'); 
     Route::delete('/{document_id}', [DocumentController::class, 'destroy'])->name('destroy');
-});
+})->middleware('auth');
 Route::group(['prefix' => 'projects', 'as' => 'projects.'], function () {
     Route::get('/', [ProjectController::class, 'index'])->name('index');
     Route::get('/create', [ProjectController::class, 'create'])->name('create');
     Route::post('/', [ProjectController::class, 'store'])->name('store');
     Route::get('/{project_id}/edit', [ProjectController::class, 'edit'])->name('edit'); 
     Route::delete('/{project_id}', [ProjectController::class, 'destroy'])->name('destroy');
-});
+})->middleware('auth');
 Route::group(['prefix' => 'memberships', 'as' => 'memberships.'], function () {
     Route::get('/', [MembershipController::class, 'create'])->name('create');
     Route::post('/', [MembershipController::class, 'store'])->name('store');
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/index', [MembershipController::class, 'index'])->name('index');
-        Route::get('/{membership}', [MembershipController::class, 'show'])->name('show');
-        Route::put('/{membership}', [MembershipController::class, 'update'])->name('update');
-        Route::delete('/{membership}', [MembershipController::class, 'destroy'])->name('destroy');
-        Route::post('/{membershipApplicant}/approve', [MembershipController::class, 'approve'])->name('approve');
-        Route::post('/{membership}/reject', [MembershipController::class, 'reject'])->name('reject');
+        Route::get('/{membership}', [MembershipController::class, 'show'])->name('show')->where('membership', '[0-9]+');
+        Route::put('/{membership}', [MembershipController::class, 'update'])->name('update')->where('membership', '[0-9]+');
+        Route::delete('/{membership}', [MembershipController::class, 'destroy'])->name('destroy')->where('membership', '[0-9]+');
+        Route::post('/{membershipApplicant}/approve', [MembershipController::class, 'approve'])->name('approve')->where('membershipApplicant', '[0-9]+');
+        Route::post('/{membership}/reject', [MembershipController::class, 'reject'])->name('reject')->where('membership', '[0-9]+');
         Route::get('/generate-number', [MembershipController::class, 'generateMemberNumber'])->name('generate-number');
         Route::get('/export', [MembershipController::class, 'export'])->name('export');
         Route::get('/statistics', [MembershipController::class, 'statistics'])->name('statistics');
@@ -355,12 +360,12 @@ Route::prefix('mobile-banking-applications')
     // Admin routes
     Route::middleware(['auth:sanctum'])->group(function () {
         Route::get('/list', [MobileBankingApplicationController::class, 'index'])->name('index');
-        Route::get('/{mobileBankingApplicant}', [MobileBankingApplicationController::class, 'show'])->name('show');
-        Route::put('/{mobileBankingApplicant}', [MobileBankingApplicationController::class, 'update'])->name('update');
-        Route::delete('/{mobileBankingApplicant}', [MobileBankingApplicationController::class, 'destroy'])->name('destroy');
-        Route::post('/{mobileBankingApplicant}/approve', [MobileBankingApplicationController::class, 'approve'])->name('approve');
-        Route::post('/{mobileBankingApplicant}/reject', [MobileBankingApplicationController::class, 'reject'])->name('reject');
-        Route::post('/{mobileBankingApplicant}/process', [MobileBankingApplicationController::class, 'process'])->name('process');
+        Route::get('/{mobileBankingApplicant}', [MobileBankingApplicationController::class, 'show'])->name('show')->where('mobileBankingApplicant', '^[0-9]+$');
+        Route::put('/{mobileBankingApplicant}', [MobileBankingApplicationController::class, 'update'])->name('update')->where('mobileBankingApplicant', '^[0-9]+$');
+        Route::delete('/{mobileBankingApplicant}', [MobileBankingApplicationController::class, 'destroy'])->name('destroy')->where('mobileBankingApplicant', '^[0-9]+$');
+        Route::post('/{mobileBankingApplicant}/approve', [MobileBankingApplicationController::class, 'approve'])->name('approve')->where('mobileBankingApplicant', '^[0-9]+$');
+        Route::post('/{mobileBankingApplicant}/reject', [MobileBankingApplicationController::class, 'reject'])->name('reject')->where('mobileBankingApplicant', '^[0-9]+$');
+        Route::post('/{mobileBankingApplicant}/process', [MobileBankingApplicationController::class, 'process'])->name('process')->where('mobileBankingApplicant', '^[0-9]+$');
         Route::get('/statistics', [MobileBankingApplicationController::class, 'statistics'])->name('statistics');
         Route::get('/export', [MobileBankingApplicationController::class, 'export'])->name('export');
         Route::get('/customer/mobile-numbers', [MobileBankingApplicationController::class, 'getCustomerMobileNumbers'])->name('customer.mobile-numbers');
@@ -379,13 +384,13 @@ Route::prefix('kyc')
         // Admin routes (protected)
         Route::middleware(['auth:sanctum'])->group(function () {
             Route::get('/', [KycController::class, 'index'])->name('index');
-            Route::get('/{kyc}', [KycController::class, 'show'])->name('show');
-            Route::put('/{kyc}', [KycController::class, 'approve'])->name('approve');
-            Route::delete('/{kyc}', [KycController::class, 'destroy'])->name('destroy');
+            Route::get('/{kyc}', [KycController::class, 'show'])->name('show')->where('kyc', '[0-9]+');
+            Route::put('/{kyc}', [KycController::class, 'approve'])->name('approve')->where('kyc', '[0-9]+');
+            Route::delete('/{kyc}', [KycController::class, 'destroy'])->name('destroy')->where('kyc', '[0-9]+');
 
             // Verification actions
-            Route::post('/{kyc}/verify', [KycController::class, 'verify'])->name('verify');
-            Route::post('/{kyc}/reject', [KycController::class, 'reject'])->name('reject');
+            Route::post('/{kyc}/verify', [KycController::class, 'verify'])->name('verify')->where('kyc', '[0-9]+');
+            Route::post('/{kyc}/reject', [KycController::class, 'reject'])->name('reject')->where('kyc', '[0-9]+');
             Route::post('/bulk-verify', [KycController::class, 'bulkVerify'])->name('bulk-verify');
 
             // Reports & statistics
@@ -407,14 +412,14 @@ Route::prefix('group-memberships')
         // Admin routes (protected)
         Route::middleware(['auth'])->group(function () {
             Route::get('/', [GroupMembershipController::class, 'index'])->name('index');
-            Route::get('/{groupMembership}', [GroupMembershipController::class, 'show'])->name('show');
-            Route::get('/{groupMembership}/summary', [GroupMembershipController::class, 'summary'])->name('summary');
-            Route::put('/{groupMembership}', [GroupMembershipController::class, 'update'])->name('update');
-            Route::delete('/{groupMembership}', [GroupMembershipController::class, 'destroy'])->name('destroy');
+            Route::get('/{groupMembership}', [GroupMembershipController::class, 'show'])->name('show')->whereNumber('groupMembership');
+            Route::get('/{groupMembership}/summary', [GroupMembershipController::class, 'summary'])->name('summary')->whereNumber('groupMembership');
+            Route::put('/{groupMembership}', [GroupMembershipController::class, 'update'])->name('update')->whereNumber('groupMembership');
+            Route::delete('/{groupMembership}', [GroupMembershipController::class, 'destroy'])->name('destroy')->whereNumber('groupMembership');
 
             // Approval actions
-            Route::post('/{groupMembership}/approve', [GroupMembershipController::class, 'approve'])->name('approve');
-            Route::post('/{groupMembership}/disapprove', [GroupMembershipController::class, 'disapprove'])->name('disapprove');
+            Route::post('/{groupMembership}/approve', [GroupMembershipController::class, 'approve'])->name('approve')->where('groupMembership', '[0-9]+');
+            Route::post('/{groupMembership}/disapprove', [GroupMembershipController::class, 'disapprove'])->name('disapprove')->where('groupMembership', '[0-9]+');
             Route::post('/bulk-approve', [GroupMembershipController::class, 'bulkApprove'])->name('bulk-approve');
 
             // Reports & statistics
@@ -432,9 +437,10 @@ Route::prefix('loanapplications')->name('loanapplications.')->group(function () 
     Route::get('/', [loanapplicationController::class, 'create'])->name('create');
     Route::post('/', [loanapplicationController::class, 'store'])->name('store');
     Route::middleware(['auth:sanctum'])->group(function () {
-        Route::get('/{loanApplicant}', [loanapplicationController::class, 'show'])->name('show');
-        Route::get('/{loanApplicant}/edit', [loanapplicationController::class, 'edit'])->name('edit');
-        Route::post('/{loanApplicant}', [loanapplicationController::class, 'approve'])->name('approve');
+        Route::get('/{loanApplicant}', [loanapplicationController::class, 'show'])->name('show')->where('loanApplicant', '[0-9]+');
+        Route::get('/{loanApplicant}/edit', [loanapplicationController::class, 'edit'])->name('edit')->where('loanApplicant', '[0-9]+');
+        Route::post('/{loanApplicant}', [loanapplicationController::class, 'approve'])->name('approve')->where('loanApplicant', '[0-9]+');
+        Route::get('/export', [loanapplicationController::class, 'export'])->name('export');
     });
 });
 

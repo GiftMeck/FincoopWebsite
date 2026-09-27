@@ -283,23 +283,146 @@ class MembershipController extends Controller
 
             // Headers
             fputcsv($handle, [
-                'ID', 'Member Number', 'Full Name', 'Surname', 'First Name',
-                'Cell Phone', 'Email', 'District', 'Date of Admission', 'Created At'
+                // Personal Details
+                'title',
+                'surname',
+                'first_name',
+                'additional_name',
+                'date_of_birth',
+                'gender',
+                'nationality',
+                'marital_status',
+                'id_type',
+                'id_number',
+                'income_source',
+                'occupation',
+                'qualification',
+                'number_of_dependants',
+
+                // Address / Contact
+                'village',
+                'traditional_authority',
+                'district',
+                'physical_address',
+                'mailing_address',
+                'telephone',
+                'cell_phone',
+                'email',
+
+                // Employment
+                'employer_name',
+                'employer_address',
+                'employer_telephone',
+                'employer_fax_number',
+
+                // Monthly Deduction
+                'employment_number',
+                'monthly_shares',
+                'monthly_savings_ps',
+
+                // Beneficiaries / Nominees
+                'beneficiary_1_name',
+                'beneficiary_1_relationship',
+                'beneficiary_1_birth_date_percentage',
+                'beneficiary_2_name',
+                'beneficiary_2_relationship',
+                'beneficiary_2_birth_date_percentage',
+                'beneficiary_3_name',
+                'beneficiary_3_relationship',
+                'beneficiary_3_birth_date_percentage',
+
+                // Referees
+                'referee_name',
+                'referee_occupation',
+                'referee_address',
+                'referee_phone_number',
+
+                // Declaration
+                'declaration_accepted',
+                'application_date',
+
+                // Official Use Only
+                'entrance_fee_paid_on',
+                'entrance_fee_amount',
+                'receipt_number',
+                'completed_by',
+                'completed_date',
+                'date_of_admission',
+                'approved_disapproved_by',
+                'branch_manager',
+                'official_date',
             ]);
 
             // Data
             foreach ($memberships as $membership) {
                 fputcsv($handle, [
-                    $membership->id,
-                    $membership->member_identification_number,
-                    $membership->full_name,
-                    $membership->surname,
-                    $membership->first_name,
-                    $membership->cell_phone,
-                    $membership->email,
-                    $membership->district,
-                    $membership->date_of_admission,
-                    $membership->created_at,
+                $membership->title ?? 'N/A',
+                $membership->surname ?? 'N/A',
+                $membership->first_name ?? 'N/A',
+                $membership->additional_name ?? 'N/A',
+                $membership->date_of_birth ?? 'N/A',
+                $membership->gender ?? 'N/A',
+                $membership->nationality ?? 'N/A',
+                $membership->marital_status ?? 'N/A',
+                $membership->id_type ?? 'N/A',
+                $membership->id_number ?? 'N/A',
+                $membership->income_source ?? 'N/A',
+                $membership->occupation ?? 'N/A',
+                $membership->qualification ?? 'N/A',
+                $membership->number_of_dependants ?? 'N/A',
+
+                // Address / Contact
+                $membership->village ?? 'N/A',
+                $membership->traditional_authority ?? 'N/A',
+                $membership->district ?? 'N/A',
+                $membership->physical_address ?? 'N/A',
+                $membership->mailing_address ?? 'N/A',
+                $membership->telephone ?? 'N/A',
+                $membership->cell_phone ?? 'N/A',
+                $membership->email ?? 'N/A',
+
+                // Employment
+                $membership->employer_name ?? 'N/A',
+                $membership->employer_address ?? 'N/A',
+                $membership->employer_telephone ?? 'N/A',
+                $membership->employer_fax_number ?? 'N/A',
+
+                // Monthly Deduction
+                $membership->employment_number ?? 'N/A',
+                $membership->monthly_shares ?? 'N/A',
+                $membership->monthly_savings_ps ?? 'N/A',
+
+                // Beneficiaries / Nominees
+                $membership->beneficiary_1_name ?? 'N/A',
+                $membership->beneficiary_1_relationship ?? 'N/A',
+                $membership->beneficiary_1_birth_date_percentage ?? 'N/A',
+                $membership->beneficiary_2_name ?? 'N/A',
+                $membership->beneficiary_2_relationship ?? 'N/A',
+                $membership->beneficiary_2_birth_date_percentage ?? 'N/A',
+                $membership->beneficiary_3_name ?? 'N/A',
+                $membership->beneficiary_3_relationship ?? 'N/A',
+                $membership->beneficiary_3_birth_date_percentage ?? 'N/A',
+
+                // Referees
+                $membership->referee_name ?? 'N/A',
+                $membership->referee_occupation ?? 'N/A',
+                $membership->referee_address ?? 'N/A',
+                $membership->referee_phone_number ?? 'N/A',
+
+                // Declaration
+                $membership->declaration_accepted ? 'Accepted' : 'Not Accepted' ?? 'N/A',
+                $membership->application_date ?? 'N/A',
+
+                // Official Use Only
+                $membership->entrance_fee_paid_on ?? 'N/A',
+                $membership->entrance_fee_amount ?? 'N/A',
+                $membership->receipt_number ?? 'N/A',
+                $membership->completed_by ?? 'N/A',
+                $membership->completed_date ?? 'N/A',
+                $membership->date_of_admission ?? 'N/A',
+                $membership->approved_disapproved_by ?? 'N/A',
+                $membership->branch_manager ?? 'N/A',
+                $membership->official_date ?? 'N/A',
                 ]);
             }
 

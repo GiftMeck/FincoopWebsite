@@ -156,26 +156,40 @@ class HandleInertiaRequests extends Middleware
     ];
 
         return [
-            ...parent::share($request),
+        ...parent::share($request),
+
             'auth' => [
-                'user' => $request->user(),
+                'user' => $request->user() ? [
+                    'id' => $request->user()->id,
+                    'name' => $request->user()->name,
+                    'email' => $request->user()->email,
+                    'role' => $request->user()->role,
+                    'branch_id' => $request->user()->branch_id,
+                    'profile_picture' => $request->user()->profile_picture,
+                ] : null,
             ],
+
             'ziggy' => fn () => [
                 ...(new Ziggy)->toArray(),
                 'location' => $request->url(),
             ],
-            'filteredTabs' => $filteredTabs,
-            'routes' => $routes,
+
+            // Static navigation config — safe to share
+            'filteredTabs' => $filteredTabs ?? [],
+            'routes' => $routes ?? [],
+
+            // Flash messages — safe to share
             'flash' => [
-
                 'success' => fn () => $request->session()->get('success'),
-
                 'error' => fn () => $request->session()->get('error'),
-
             ],
-            'branches' => fn () => branch::all(),
-            'documents' => fn () => document::all(),
-            'activeTab' => fn () => $request->session()->get('activeTab')
+            'documents' => fn () => \App\Models\document::latest()
+            ->paginate(4)
+            ->through(fn ($document) => new \App\Http\Resources\DocumentResource($document)),
+            'branches' => fn() => \App\Models\branch::latest()
+            ->paginate(3)
+            ->through(fn ($branch) => new \App\Http\Resources\BranchResource($branch)),
         ];
+
     }
 }
