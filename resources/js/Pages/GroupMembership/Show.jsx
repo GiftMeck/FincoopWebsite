@@ -103,7 +103,7 @@ export default function GroupMembershipShow() {
                     router.visit(route("group-memberships.index"));
                 },
                 onError: (errors) => {
-                    console.error("Validation errors:", errors);
+                    alert("Error:", errors);
                 },
                 onFinish: () => setProcessing(false),
             }

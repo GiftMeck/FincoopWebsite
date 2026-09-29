@@ -25,10 +25,10 @@ class CustomerController extends Controller
     }
     public function store(Request $request){
         $validatedData = $request->validate([
-            'customer_name' => 'required|string',
-            'customer_email' => 'nullable|email|unique:customers',
-            'customer_phone' => 'required',
-            'customer_message' => 'required',
+            'customer_name' => ['required', 'string', 'max:100', 'regex:/^[a-zA-Z\s]+$/', 'not_regex:/<script.*?>.*?<\/script>/i'],
+            'customer_email' => ['required', 'string', 'email', 'max:50', 'regex:/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/'],
+            'customer_phone' => ['required', 'string', 'max:15', 'regex:/^\+?[0-9]{10,15}$/'],
+            'customer_message' => ['required', 'string', 'max:255', 'regex:/^[a-zA-Z\s]+$/', 'not_regex:/<script.*?>.*?<\/script>/i'],
         ]);
         Customer::create($validatedData);
         return redirect()

@@ -30,7 +30,6 @@ export default function Welcome({ serviceCategories }) {
     ];
     
     const serviceCategoriesData = serviceCategories ?? [];
-    const [currentServiceCategory, setCurrentServiceCategory] = useState(0);
     const [currentVertData, setCurrentVertData] = useState(0);
     const [currentFaq, setCurrentFaq] = useState(0);
     const [scrolled, setScrolled] = useState(false);
@@ -58,16 +57,6 @@ export default function Welcome({ serviceCategories }) {
     useEffect(() => {
         if (hovered) return;
         const interval = setInterval(() => {
-            setCurrentServiceCategory(prev =>
-                (prev + 1) % serviceCategories.length
-            );
-        }, 10000);
-        return () => clearInterval(interval);
-    }, [hovered, serviceCategories.length]);
-
-    useEffect(() => {
-        if (hovered) return;
-        const interval = setInterval(() => {
             setCurrentVertData(prev =>
                 (prev + 1) % vertsData.length
             );
@@ -84,8 +73,6 @@ export default function Welcome({ serviceCategories }) {
         }, 10000);
         return () => clearInterval(interval);
     }, [hovered, faqs.length]);
-
-    const serviceCategory = serviceCategoriesData[currentServiceCategory];
     const vert = vertsData[currentVertData];
 
     const [openCategory, setOpenCategory] = useState(null);

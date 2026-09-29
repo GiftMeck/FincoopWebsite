@@ -1,4 +1,4 @@
-import { Download } from "lucide-react";
+import { Download, Mail, Phone, Building2} from "lucide-react";
 import { usePage } from "@inertiajs/react";
 export default function Footer() {
     const documents = usePage().props.documents;
@@ -8,18 +8,11 @@ export default function Footer() {
             <div className="
                 mx-auto
                 max-w-7xl
-                px-4
-                sm:px-6
-                md:px-8
-                lg:px-10
-                xl:px-12
-                py-10
-                sm:py-12
-                lg:py-16
+                p-6
                 grid 
                 lg:grid-cols-2 
                 grid-cols-1
-                gap-12  
+                gap-2  
             ">
                 <div className="">
                     <h2 className="
@@ -53,9 +46,7 @@ export default function Footer() {
                                     border-green-700/40
                                     bg-green-800/20
                                     backdrop-blur-sm
-                                    p-5
-                                    sm:p-6
-                                    lg:p-7
+                                    p-3
                                     shadow-lg
                                     transition-all
                                     duration-300
@@ -64,34 +55,39 @@ export default function Footer() {
                                     hover:shadow-2xl
                                 "
                             >
-                                <div>
-                                    <h3 className="
-                                        mb-4
-                                        text-lg
-                                        sm:text-xl
-                                        font-semibold
-                                        text-green-300
-                                    ">
-                                        {branch.branch_name}
-                                    </h3>
+                                <h3 className="
+                                    mb-4
+                                    text-lg
+                                    sm:text-xl
+                                    font-semibold
+                                    text-green-300
+                                ">
+                                    {branch.branch_name}
+                                </h3>
 
-                                    <div className="
-                                        space-y-3
-                                        text-sm
-                                        sm:text-base
-                                        text-green-100
-                                    ">
-                                        <p>
+                                <div className="
+                                    space-y-3
+                                    text-sm
+                                    sm:text-base
+                                    text-green-100
+                                ">
+                                        <p className="text-sm">
+                                            <Building2 className="bg-green-300 p-1 rounded-sm text-green-800 inline-block mr-2" />
                                             {branch.branch_address}
                                         </p>
 
-                                        <p className="break-all">
+                                        <p className="break-all mb-4 text-sm">
+                                            <Phone className="bg-green-300 p-1 rounded-sm text-green-800 inline-block mr-2" />
                                             {branch.branch_phone}
                                         </p>
-                                        <a href={`https://${branch.branch_email}`} target="blank" className="break-all">{branch.branch_email}</a>
+                                        <address>
+                                            <a href={`https://${branch.branch_email}`} target="blank" className="break-all text-sm text-blue-500">
+                                                <Mail className="bg-green-300 p-1 rounded-sm text-green-800 inline-block mr-2" />
+                                                {branch.branch_email}
+                                            </a>
+                                        </address>
                                     </div>
                                 </div>
-                            </div>
                             )
                         })}
 

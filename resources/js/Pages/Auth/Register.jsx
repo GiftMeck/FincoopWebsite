@@ -33,7 +33,20 @@ export default function Register() {
                         id="name"
                         name="name"
                         value={data.name}
-                        className="mt-1 block w-full"
+                        className="
+                            h-11
+                            w-full
+                            rounded-xl
+                            border
+                            bg-white
+                            shadow-sm
+                            transition-all
+                            duration-200
+                            border-gray-200
+                            focus-visible:border-green-700
+                            focus-visible:ring-2
+                            focus-visible:ring-green-700/20
+                            "
                         autoComplete="name"
                         isFocused={true}
                         onChange={(e) => setData('name', e.target.value)}
@@ -51,7 +64,20 @@ export default function Register() {
                         type="email"
                         name="email"
                         value={data.email}
-                        className="mt-1 block w-full"
+                        className="
+                            h-11
+                            w-full
+                            rounded-xl
+                            border
+                            bg-white
+                            shadow-sm
+                            transition-all
+                            duration-200
+                            border-gray-200
+                            focus-visible:border-green-700
+                            focus-visible:ring-2
+                            focus-visible:ring-green-700/20
+                            "
                         autoComplete="username"
                         onChange={(e) => setData('email', e.target.value)}
                         required
@@ -68,7 +94,20 @@ export default function Register() {
                         type="password"
                         name="password"
                         value={data.password}
-                        className="mt-1 block w-full"
+                        className="
+                            h-11
+                            w-full
+                            rounded-xl
+                            border
+                            bg-white
+                            shadow-sm
+                            transition-all
+                            duration-200
+                            border-gray-200
+                            focus-visible:border-green-700
+                            focus-visible:ring-2
+                            focus-visible:ring-green-700/20
+                            "
                         autoComplete="new-password"
                         onChange={(e) => setData('password', e.target.value)}
                         required
@@ -88,7 +127,20 @@ export default function Register() {
                         type="password"
                         name="password_confirmation"
                         value={data.password_confirmation}
-                        className="mt-1 block w-full"
+                        className="
+                            h-11
+                            w-full
+                            rounded-xl
+                            border
+                            bg-white
+                            shadow-sm
+                            transition-all
+                            duration-200
+                            border-gray-200
+                            focus-visible:border-green-700
+                            focus-visible:ring-2
+                            focus-visible:ring-green-700/20
+                            "
                         autoComplete="new-password"
                         onChange={(e) =>
                             setData('password_confirmation', e.target.value)

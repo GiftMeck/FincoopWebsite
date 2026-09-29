@@ -132,6 +132,9 @@ export default function Create() {
                     inertiaForm.reset();
                     setCurrentStep(1);
                 },
+                onError: (errors) => {
+                    alert("Error:", errors);
+                },
             }
         );
 

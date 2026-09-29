@@ -154,7 +154,7 @@ export default function Create() {
                     setCurrentStep(1);
                 },
                 onError: (errors) => {
-                    console.error("Submission errors:", errors);
+                    alert("Error:", errors);
                 },
             });
     };

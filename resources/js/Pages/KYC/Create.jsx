@@ -6,42 +6,18 @@ import UseKYCInertiaForm from "./Components/kycInertiaForm";
 import { stepFields } from "./Components/kycStepFields";
 import { steps } from "./Components/kycSteps";
 import TextField from '@/Components/TextField';
-import TextareaField from "@/Components/TextareaField";
 import SelectField from "@/Components/SelectField";
 import CheckboxField from "@/Components/CheckboxField";
 import SectionHeader from "@/Components/SectionHeader";
+import { ErrorMessages } from "@/Components/ErrorMessage";
 import {
     Controller
 } from "react-hook-form";
 
 
 import {
-    Field,
-    FieldError,
     FieldGroup,
-    FieldLabel,
 } from "@/Components/ui/field";
-
-import {
-    Input,
-} from "@/Components/ui/input";
-
-import {
-    Textarea,
-} from "@/Components/ui/textarea";
-
-import {
-    Select,
-    SelectContent,
-    SelectItem,
-    SelectTrigger,
-    SelectValue,
-} from "@/Components/ui/select";
-
-import {
-    Checkbox,
-} from "@/Components/ui/checkbox";
-
 import {
     Button,
 } from "@/Components/ui/button";
@@ -50,25 +26,17 @@ import {
     Card,
     CardContent,
     CardHeader,
-    CardTitle,
 } from "@/Components/ui/card";
 
 import {
     Check,
     ChevronLeft,
     ChevronRight,
-    FileCheck2,
     UserRound,
     Users,
-    Fingerprint,
-    BookOpen,
-    MapPin,
     Shield,
     Heart,
     Handshake,
-    Crown,
-    AlertCircle,
-    UserPlus,
     Sparkles,
     BadgeCheck,
     Building2,
@@ -148,6 +116,9 @@ export default function Create() {
                     inertiaForm.reset();
                     setCurrentStep(1);
                 },
+                onError: (errors) => {
+                    alert("Error:", errors);
+                }
             }
         );
 

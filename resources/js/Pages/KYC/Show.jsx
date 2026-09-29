@@ -26,11 +26,7 @@ import {
     XCircle,
     Fingerprint,
     MapPin,
-    Phone,
-    Mail,
-    ShieldCheck,
-    Building2,
-    BadgeCheck,
+    
 } from "lucide-react";
 
 const kycCheckSchema = z.object({
@@ -93,7 +89,7 @@ export default function KYCShow() {
                     router.visit(route("kyc.index"));
                 },
                 onError: (errors) => {
-                    console.error("Validation errors:", errors);
+                    alert("Error:", errors);
                 },
                 onFinish: () => setProcessing(false),
             }
