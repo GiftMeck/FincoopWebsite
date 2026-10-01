@@ -74,23 +74,18 @@ export default function Show() {
                                     {serviceCategory.category_name}
                                 </h1>
                                 <div className="
-                                    my-5
+                                    my-2
                                     h-1
                                     w-20
                                     rounded-full
                                     bg-orange-500
-
                                     sm:w-28
                                 " />
                                 <p className="
                                     max-w-3xl
                                     text-sm
-                                    leading-7
+                                    leading-tight
                                     text-white/90
-
-                                    sm:text-base
-                                    sm:leading-8
-                                    lg:text-lg
                                 ">
                                     {serviceCategory.category_description}
                                 </p>

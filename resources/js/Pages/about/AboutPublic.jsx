@@ -17,7 +17,8 @@ export default function AboutPublic() {
                                 key={about.about_id ?? index}
                                 className="
                                     grid
-                                    grid-cols-12
+                                    grid-cols-1
+                                    lg:grid-cols-2
                                     overflow-hidden
                                     rounded-3xl
                                     bg-white

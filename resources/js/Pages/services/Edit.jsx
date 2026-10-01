@@ -183,7 +183,7 @@ export default function Edit({
                             Select Service Branch
                         </option>
 
-                        {branches.data.map((branch) => (
+                        {branches.map((branch) => (
                             <option
                                 key={branch.branch_id}
                                 value={branch.branch_id}

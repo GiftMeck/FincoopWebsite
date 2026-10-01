@@ -12,8 +12,8 @@ export default function Create() {
     };
 
     return (
-        <div className="p-6 flex justify-center items-center h-screen">
-            <div className="bg-gray-100 rounded shadow-md p-8 flex flex-col w-full max-w-md">
+        <div className="p-6 flex justify-center items-center h-full">
+            <div className="bg-gray-100 rounded shadow-md p-6 flex flex-col w-full">
                 <h1 className="text-xl text-center font-semibold mb-4">Create Partners</h1>
                 <form onSubmit={submit}>
                     <div className="mb-4 flex flex-col">

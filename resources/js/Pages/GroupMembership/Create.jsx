@@ -326,8 +326,6 @@ export default function Create() {
                                                     font-bold
                                                     transition-all
                                                     duration-300
-                                                    sm:h-16
-                                                    sm:w-16
 
                                                     ${isActive
                                                         ? `

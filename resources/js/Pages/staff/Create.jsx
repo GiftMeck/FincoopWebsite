@@ -56,7 +56,7 @@ export default function Create({roles, branches}) {
                     >
                         <option value="">Select branch</option>
 
-                        {branches.data.map((branch) => (
+                        {branches.map((branch) => (
                             <option key={branch.branch_id} value={branch.branch_id}>
                                 {branch.branch_name}
                             </option>

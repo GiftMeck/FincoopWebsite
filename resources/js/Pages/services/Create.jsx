@@ -69,7 +69,7 @@ export default function Create() {
                         >
                             <option value="">Select service branch</option>
 
-                            {branches && (branches.data.map((branch) => (
+                            {branches && (branches.map((branch) => (
                                 <option key={branch.branch_id} value={branch.branch_id}>
                                     {branch.branch_name}
                                 </option>

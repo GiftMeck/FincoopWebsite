@@ -1,6 +1,6 @@
-import { usePage, useForm, Link } from "@inertiajs/react";
-import { useState, useEffect } from "react";
-export default function Edit({role, onUpdate}) {
+import { useForm} from "@inertiajs/react";
+import { useEffect } from "react";
+export default function Edit({selectedRole, onUpdate}) {
          const {
                 data,
                 setData,
@@ -8,99 +8,53 @@ export default function Edit({role, onUpdate}) {
                 processing,
                 errors,
             } = useForm({
-                about_title: '',
-                about_description: '',
-                about_image: null,
+                role_name: '',
                 _method: "PUT"
             });
         
             useEffect(() => {
-                if (about) {
+                if (selectedRole) {
                     setData({
-                        about_title: about.about_title,
-                        about_description: about.about_description,
-                        about_image: about.about_image,
+                        role_name: selectedRole.role_name,
                         _method: "PUT",
                     });
                 }
-            }, [about]);
+            }, [selectedRole]);
         
             const submit = (e) => {
                 e.preventDefault();
         
-                if (!about) {
+                if (!selectedRole) {
                     return;
                 }
         
-                post(route("about.update", about.about_id), {
+                post(route("roles.update", selectedRole.role_id), {
                     forceFormData: true,
                     onSuccess: (page) => {
-                        onUpdate(page.props.abouts);
+                        onUpdate(page.props.roles);
                     }
                 });
             };
-        
-            if (!about) {
-                return (
-                    <div className="bg-gray-100 rounded shadow-md p-8">
-                        <h1 className="text-xl font-semibold mb-4">
-                            Edit About
-                        </h1>
-        
-                        <p className="text-gray-500">
-                            Select a About from the list to edit it.
-                        </p>
-                    </div>
-                );
-            }
     return (
-        <div className="bg-gray-100 rounded shadow-md p-8">
-            <h1 className="text-xl text-center font-semibold mb-4">Edit About Content</h1>
-            <form onSubmit={submit}>
-                <div className="mb-4 flex flex-col">
-                    <label>About Title</label>
-                    <input
-                        type="text"
-                        value={data.about_title}
-                        onChange={(e) => setData('about_title', e.target.value)}
-                        className="border rounded p-2"
-                    />
-                    {errors.about_title && <div>{errors.about_title[0]}</div>}
-                </div>
-                <div className="mb-4 flex flex-col">
-                    <label>About Description</label>
-                    <textarea
-                        value={data.about_description}
-                        onChange={(e) => setData('about_description', e.target.value)}
-                        className="border rounded p-2"
-                    />
-                    {errors.about_description && <div>{errors.about_description}</div>}
-                </div>
-                <div className="mb-4 flex flex-col">
-                    <label>About Image</label>
-                    <input
-                        type="file"
-                        onChange={(e) => setData('about_image', e.target.files[0])}
-                    />
-                    {errors.about_image && <div>{errors.about_image}</div>}
-                </div>
-                <button
-                    type="submit"
-                    disabled={processing}
-                    className="
-                        w-full
-                        bg-green-700
-                        hover:bg-green-800
-                        text-white
-                        rounded
-                        p-2
-                    "
-                >
-                    {processing
-                        ? "Updating..."
-                        : "Update Document"}
-                </button>
-            </form>
+        <div className="p-6 flex justify-center items-center h-full">
+            <div className="bg-gray-100 rounded shadow-md p-8 flex flex-col justify-start w-full">
+                <h1 className="text-xl text-center font-semibold mb-4">Edit Role</h1>
+                <form onSubmit={submit}>
+                    <div className="mb-4 flex flex-col">
+                        <label>Name</label>
+                        <input
+                            type="text"
+                            value={data.role_name}
+                            onChange={(e) => setData('role_name', e.target.value)}
+                            className="border rounded p-2"
+                        />
+                        {errors.role_name && <div>{errors.role_name}</div>}
+                    </div>
+                    <button className="bg-green-700 text-white rounded p-2" type="submit" disabled={processing}>
+                        {processing ? 'Processing...' : 'Update'}
+                    </button>
+                </form>
+            </div>
         </div>
         )
     }

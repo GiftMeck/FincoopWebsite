@@ -63,7 +63,7 @@ const loanCheckSchema = z.object({
 
 export default function LoanShow() {
     const { loanApplicant } = usePage().props;
-    const errorMessage = null;
+    //const errorMessage = null;
     /*
     React Hook Form — only official fields
     */
@@ -122,9 +122,9 @@ export default function LoanShow() {
             route("loanapplications.approve", loanApplicant.id),
             {
                 preserveScroll: true,
-                onError: (errors) => {
+                /*onError: (errors) => {
                     errorMessage={...errors};
-                },
+                },*/
                 onFinish: () => setProcessing(false),
             }
         );
@@ -151,9 +151,9 @@ export default function LoanShow() {
                 onSuccess: () => {
                     router.visit(route("dashboard"));
                 },
-                onError: (errors) => {
+                /*onError: (errors) => {
                     errorMessage={...errors};
-                },
+                },*/
                 onFinish: () => setProcessing(false),
             }
         );

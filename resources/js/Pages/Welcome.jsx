@@ -8,8 +8,8 @@ import { User } from "lucide-react";
 import { Briefcase, ChevronDown, ArrowRight, Shield, Star, Users, Clock, Award, Heart, Handshake, Crown, Sparkles, CircleCheck, Building2, FileCheck2, WalletCards, ShieldCheck, Landmark, ClipboardCheck, UserRound, Mail, Phone, MapPin, IdCard } from "lucide-react";
 import Create from "./customers/Create";
 import { Head, Link, usePage } from '@inertiajs/react';
-import { motion, AnimatePresence, useAnimation } from 'framer-motion';
-import { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect} from 'react';
 import { FaArrowDown, FaArrowRight, FaArrowUp } from 'react-icons/fa';
 import NavBar from '@/Layouts/NavBar';
 import Footer from '@/Layouts/Footer';
@@ -185,7 +185,7 @@ export default function Welcome({ serviceCategories }) {
                                             ">
                                                 Apply For Membership
                                             </h2>
-                                            <p className="mt-4 text-green-300">
+                                            <p className="mt-4 text-green-300 p-4">
                                                 Start your journey towards financial freedom
                                             </p>
                                             <Link
@@ -223,7 +223,7 @@ export default function Welcome({ serviceCategories }) {
                         </AnimatePresence>
                     </div>
                 </div>
-                <div className="grid grid-cols-1 gap-4 md:grid-cols-4 -mt-8 relative z-10">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-4 mt-8 relative z-10">
                     <div className="
                         rounded-2xl
                         bg-white

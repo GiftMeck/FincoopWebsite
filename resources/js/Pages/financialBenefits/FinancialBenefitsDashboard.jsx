@@ -8,9 +8,8 @@ export default function FinancialBenefitsDashboard() {
     const [updatedfinancialBenefits, setupdatedfinancialBenefit] = useState(null);
     const {financialBenefits} = usePage().props;
     return(
-        <div className="flex flex-col">
-            <div className="flex flex-row justify-between items-center">
-                <h1 className="text-2xl font-bold">Financial Benefits</h1>
+        <div className="container mx-auto p-5">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
                 <Index 
                     financialBenefits={updatedfinancialBenefits || financialBenefits} 
                     onEdit={setselectedfinancialBenefit}

@@ -183,12 +183,13 @@ class HandleInertiaRequests extends Middleware
                 'success' => fn () => $request->session()->get('success'),
                 'error' => fn () => $request->session()->get('error'),
             ],
-            'documents' => fn () => \App\Models\document::latest()
-            ->paginate(4)
-            ->through(fn ($document) => new \App\Http\Resources\DocumentResource($document)),
-            'branches' => fn() => \App\Models\branch::latest()
-            ->paginate(3)
-            ->through(fn ($branch) => new \App\Http\Resources\BranchResource($branch)),
+            'documents' => fn () => \App\Http\Resources\DocumentResource::collection(
+                    \App\Models\document::latest()->take(4)->get()
+                ),
+
+            'branches' => fn () => \App\Http\Resources\BranchResource::collection(
+                    \App\Models\branch::latest()->take(3)->get()
+                ),
         ];
 
     }

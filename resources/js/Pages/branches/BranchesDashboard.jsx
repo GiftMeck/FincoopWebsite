@@ -9,7 +9,7 @@ const BranchesDashboard = () => {
     const [updatedBranches, setUpdatedBranches] = useState(null);
     return(
         <div className="flex flex-col">
-            <div className="flex flex-row justify-between items-center">
+            <div className="flex flex-row justify-between">
                 <Index 
                     branches={branches}
                     onEdit={setSelectedBranch}

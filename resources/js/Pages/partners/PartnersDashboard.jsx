@@ -1,17 +1,24 @@
 import Create from "./Create";
 import Index from "./Index";
 import Edit from "./Edit";
-
-export default function PartnersDashboard({partners=[]}) {
+import { usePage } from "@inertiajs/react";
+import { useState } from "react";
+export default function FinancialBenefitsDashboard() {
+    const [selectedPartner, setSelectedPartner] = useState(null);
+    const [updatedPartners, setUpdatedPartners] = useState(null);
+    const {partners} = usePage().props;
     return(
-        <div className="container">
-            <div className="row">
-                <div className="col-md-12">
-                    <h1>Partners</h1>
-                    <Create />
-                    <Index partners={partners} />
-                    <Edit />
-                </div>
+        <div className="flex flex-col">
+            <div className="flex flex-row justify-between items-center">
+                <Index 
+                    partners={updatedPartners || partners} 
+                    onEdit={setSelectedPartner}
+                />
+                <Edit 
+                    selectedPartner={selectedPartner}
+                    onUpdate={setUpdatedPartners}  
+                />
+                <Create/>
             </div>
         </div>
     )

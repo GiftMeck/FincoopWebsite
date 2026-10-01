@@ -1,14 +1,60 @@
 import NavBar from "@/Layouts/NavBar";
-import { usePage } from "@inertiajs/react";
-export default function Index() {
-    const user = usePage().props.auth.user;
-    const ActionSource = usePage().props.ActionSource;
-    const contacts = usePage().props.contacts ?? [];
+import { usePage, Link } from "@inertiajs/react";
+export default function Index({contacts}) {
     return (
         <>
-            {ActionSource ? <NavBar scrolled={true}/> : null}
-            <div>
-                <h1>Contact Index</h1>
+            <div className="h-full bg-gray-100 shadow-md w-full flex flex-col border p-4">
+                <h1 className="text-xl text-center font-semibold mb-4">Contacts</h1>
+                {contacts && contacts.data.map((contact) =>(
+                    <div key={contact.contact_id}
+                        className="flex justify-between bg-white items-center p-4 border-2 border-gray-300 rounded-lg"
+                    >
+                        <div>
+                            <span>{contact.contact_number}</span>
+                        </div>
+                        <div>
+                            <span>{contact.contact_email}</span>
+                        </div>
+                        <div className="flex justify-end">
+                            <button
+                                onClick={() => onEdit(contact)}
+                            >
+                                <span className="text-white mx-2 bg-blue-500 rounded-lg p-2">Edit</span>
+                            </button>
+                            <button
+                                
+                            >
+                                <span className="text-white mx-2 bg-red-500 rounded-lg p-2">Delete</span>
+                            </button>
+                        </div>
+                    </div>
+                ))}
+                <div className="py-4">
+                    {contacts && (contacts.links.map((link, index) => (
+                        <Link
+                            key={index}
+                            href={link.url ?? "#"}
+                            preserveScroll
+                            preserveState
+                            className={`
+                                px-4
+                                py-2
+                                rounded-lg
+                                border
+
+                                ${
+                                    link.active
+                                        ? "bg-green-700 text-white"
+                                        : "bg-white text-green-900 hover:bg-green-100"
+                                }
+
+                                ${!link.url ? "pointer-events-none opacity-40" : ""}
+                            `}
+                            dangerouslySetInnerHTML={{ __html: link.label }}
+                        />
+
+                    )))}
+                </div>
             </div>
         </>
     );

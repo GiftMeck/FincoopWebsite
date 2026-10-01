@@ -44,7 +44,7 @@ export default function Edit({faq, onUpdate}) {
                     onUpdate(page.props.faqs);
                 }
             });
-        };
+    };
     return(
         <div className="bg-gray-100 rounded shadow-md p-8">
             <div className="text-xl mb-6">

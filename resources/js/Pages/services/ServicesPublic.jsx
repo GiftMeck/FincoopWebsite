@@ -10,7 +10,6 @@ export default function ServiceCategoriesPublic() {
 
             <div className="bg-gray-100 p-4">
                 <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-
                     <div className={`grid grid-cols-1 gap-10 lg:grid-cols-2 lg:items-start`}>
                         {serviceCategories && (serviceCategories.map((category, index) =>{
                             return (
@@ -36,12 +35,7 @@ export default function ServiceCategoriesPublic() {
                                                 <h1 className="text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">
                                                     {category.category_name}
                                                 </h1>
-
-                                                <div className="my-5 h-1 w-24 rounded-full bg-orange-500" />
-
-                                                <p className="max-w-xl text-sm leading-7 text-white/90 sm:text-base lg:text-lg">
-                                                    {category.category_description}
-                                                </p>
+                                                <div className="my-2 h-1 w-24 rounded-full bg-orange-500" />
                                             </div>
                                         </div>
                                     </div>

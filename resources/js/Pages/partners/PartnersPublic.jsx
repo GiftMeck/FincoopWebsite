@@ -35,8 +35,8 @@ export default function PartnersPublic() {
             <NavBar />
             <div className="container bg-gray-100 p-4">
                 <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-                    <div className="grid grid-cols-12 bg-white gap-8 shadow-lg rounded-lg p-8 transition-shadow duration-300 hover:shadow-3xl">
-                        <div className="col-span-12 lg:col-span-6 flex flex-col p-8 items-start justify-center">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 bg-white gap-8 shadow-lg rounded-lg p-8 transition-shadow duration-300 hover:shadow-3xl">
+                        <div className="flex flex-col p-8 items-start justify-center">
                             <div className="p-8">
                                 {partners.map((partner) => (
                                     <h2
@@ -58,7 +58,7 @@ export default function PartnersPublic() {
                             </div>
 
                         </div>
-                        <div className="col-span-12 lg:col-span-6 h-[550px]">
+                        <div className="h-[550px]">
 
                             <Link
                                 href={route(

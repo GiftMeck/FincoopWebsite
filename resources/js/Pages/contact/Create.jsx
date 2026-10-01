@@ -16,7 +16,7 @@ export default function Create() {
     };
 
     return (
-        <div className="p-6 flex justify-center items-center h-screen">
+        <div className="p-6 flex justify-center items-center h-full flex-1">
             <div className="bg-gray-100 rounded shadow-md p-8 flex flex-col w-full max-w-md">
                 <h1 className="text-xl text-center font-semibold mb-4">Create Contacts</h1>
                 <form onSubmit={submit}>
@@ -77,7 +77,7 @@ export default function Create() {
                         >
                             <option value="">Select Partner</option>
 
-                            {partners && (partners.map((partner) => (
+                            {partners && (partners.data.map((partner) => (
                                 <option key={partner.partner_id} value={partner.partner_id}>
                                     {partner.partner_name}
                                 </option>

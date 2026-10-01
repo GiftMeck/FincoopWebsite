@@ -18,11 +18,10 @@ import {
 
 export default function ReadMore() {
     const { documents } = usePage().props;
-
     const loanDocument =
-    documents?.data?.find((doc) =>
-        doc.document_name?.toLowerCase().includes("loan")
-    ) ?? documents?.data?.[0];
+    documents?.find((doc) =>
+        doc.document_name?.toLowerCase().includes("Loan")
+    ) ?? documents?.[0];
 
     return (
         <>

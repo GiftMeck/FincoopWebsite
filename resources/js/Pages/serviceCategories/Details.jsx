@@ -61,7 +61,7 @@ export default function Details(){
                                     mt-3
                                     line-clamp-5
                                     text-sm
-                                    leading-relaxed
+                                    leading-tight
                                     text-gray-600
                                     sm:text-base
                                     lg:text-lg

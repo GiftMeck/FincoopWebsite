@@ -44,7 +44,7 @@ export default function Edit({selectedBranch, onUpdate}) {
                 });
         };
     return (
-        <div className="p-6 flex justify-center items-center h-screen">
+        <div className="p-6 flex justify-center items-center h-full">
             <div className="bg-gray-100 rounded shadow-md p-8 flex flex-col w-full max-w-md">
                 <h1 className="text-xl text-center font-semibold mb-4">Edit Branch</h1>
                 <form onSubmit={submit}>

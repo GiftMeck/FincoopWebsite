@@ -255,9 +255,6 @@ export default function Create() {
                                                     font-bold
                                                     transition-all
                                                     duration-300
-                                                    sm:h-14
-                                                    sm:w-14
-
                                                     ${isActive
                                                         ? `
                                                             border-green-800
@@ -343,8 +340,6 @@ export default function Create() {
                                                 </p>
                                             </div>
                                         </div>
-
-                                        {/* Connector - dotted (different from loan page) */}
 
                                         {index < steps.length - 1 && (
                                             <div className="

@@ -173,32 +173,16 @@ export default function Dashboard() {
                         <div className="p-6 text-gray-900">
                             {activeTab === 'SERVICE CATEGORIES' && <ServiceCategoriesDashboard/>}
                             {activeTab === 'SERVICES' && <ServicesDashboard />}
-                            {activeTab === 'BRANCHES' && <BranchesDashboard 
-                                branches={usePage().props?.branches} />}
                             {activeTab === 'ABOUT' && <AboutDashboard />}
                             {activeTab === 'STAFF' && <StaffDashboard />}
-                            {activeTab === 'GALLERY' && <GalleryDashboard
-                                galleries={usePage().props?.galleries}
-                                users={usePage().props?.users}
-                                branches={usePage().props?.branches}
-                                services={usePage().props?.services}
-                                partners={usePage().props?.partners} />}
-                            {activeTab === 'FAQs' && <FaqDashboard 
-                                faqs={usePage().props?.faqs}
-                                users={usePage().props?.users}
-                                customers={usePage().props?.customers} />}
-                            {activeTab === 'CONTACTS' && <ContactDashboard
-                                contacts={usePage().props?.contacts} 
-                                branches={usePage().props?.branches}
-                                partners={usePage().props?.partners} />}
-                            {activeTab === 'PARTNERS' && <PartnersDashboard partners={usePage().props?.partners} />}
-                            {activeTab === 'TESTIMONIALS' && <TestimonialsDashboard 
-                                testimonials={usePage().props?.testimonials}
-                                customers={usePage().props?.customers}
-                                partners={usePage().props?.partners} />}
+                            {activeTab === 'GALLERY' && <GalleryDashboard />}
+                            {activeTab === 'FAQs' && <FaqDashboard />}
+                            {activeTab === 'CONTACTS' && <ContactDashboard />}
+                            {activeTab === 'PARTNERS' && <PartnersDashboard />}
+                            {activeTab === 'TESTIMONIALS' && <TestimonialsDashboard />}
                             {activeTab === 'BRANCHES' && <BranchesDashboard/>}
-                            {activeTab === 'ROLES' && <RolesDashboard roles={usePage().props?.roles} />}
-                            {activeTab === 'CUSTOMERS' && <CustomersDashboard customers={usePage().props?.customers} />}
+                            {activeTab === 'ROLES' && <RolesDashboard />}
+                            {activeTab === 'CUSTOMERS' && <CustomersDashboard />}
                             {activeTab === 'FINANCIAL BENEFITS' && <FinancialBenefitsDashboard />}
                             {activeTab === 'ADVERTS' && <VertsDashboard verts={usePage().props?.verts} />}
                             {activeTab === 'DOCUMENTS' && <DocumentsDashboard />}

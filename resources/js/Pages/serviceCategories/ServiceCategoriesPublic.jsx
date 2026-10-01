@@ -34,9 +34,9 @@ export default function ServiceCategoriesPublic() {
                                         {category.category_name}
                                     </h1>
 
-                                    <div className="my-5 h-1 w-24 rounded-full bg-orange-500" />
+                                    <div className="my-2 h-1 w-24 rounded-full bg-orange-500" />
 
-                                    <p className="max-w-xl text-sm leading-7 text-white/90 sm:text-base lg:text-lg">
+                                    <p className="max-w-xl text-sm leading-tight text-white/90 sm:text-base lg:text-lg">
                                         {category.category_description}
                                     </p>
                                 </div>
@@ -72,7 +72,7 @@ export default function ServiceCategoriesPublic() {
                                                 {service.service_name}
                                             </h3>
 
-                                            <p className="mt-2 line-clamp-3 text-sm leading-6 text-slate-600">
+                                            <p className="mt-2 line-clamp-3 text-sm leading-tight text-slate-600">
                                                 {service.service_description}
                                             </p>
                                         </div>

@@ -1,222 +1,149 @@
-import { Download, Mail, Phone, Building2} from "lucide-react";
+import { Download, Mail, Phone, Building2 } from "lucide-react";
 import { usePage } from "@inertiajs/react";
+
 export default function Footer() {
-    const documents = usePage().props.documents;
-    const branches = usePage().props.branches;
+    const documents = usePage().props?.documents ?? [];
+    const branches = usePage().props?.branches ?? [];
     return (
         <footer className="bg-green-950 text-white">
-            <div className="
-                mx-auto
-                max-w-7xl
-                p-6
-                grid 
-                lg:grid-cols-2 
-                grid-cols-1
-                gap-2  
-            ">
-                <div className="">
-                    <h2 className="
-                        text-center
-                        text-2xl
-                        sm:text-3xl
-                        font-bold
-                        text-green-300/70
-                    ">
-                        OUR BRANCHES
-                    </h2>
+            <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12">
+                    <section>
+                        <h2 className="text-xl sm:text-2xl font-bold tracking-wide text-green-300/80">
+                            Our Branches
+                        </h2>
 
-                    <div className="
-                        grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 
-                        gap-2
-                        mt-7
-                    ">
-
-                        {branches.data.map((branch) => {
-                            return(
-                                <div
-                                key={branch.branch_id}
-                                className="
-                                    flex
-                                    flex-col
-                                    justify-between
-                                    h-full
-                                    min-h-[240px]
-                                    rounded-xl
-                                    border
-                                    border-green-700/40
-                                    bg-green-800/20
-                                    backdrop-blur-sm
-                                    p-3
-                                    shadow-lg
-                                    transition-all
-                                    duration-300
-                                    hover:-translate-y-2
-                                    hover:bg-green-800/40
-                                    hover:shadow-2xl
-                                "
-                            >
-                                <h3 className="
-                                    mb-4
-                                    text-lg
-                                    sm:text-xl
-                                    font-semibold
-                                    text-green-300
-                                ">
-                                    {branch.branch_name}
-                                </h3>
-
-                                <div className="
-                                    space-y-3
-                                    text-sm
-                                    sm:text-base
-                                    text-green-100
-                                ">
-                                        <p className="text-sm">
-                                            <Building2 className="bg-green-300 p-1 rounded-sm text-green-800 inline-block mr-2" />
-                                            {branch.branch_address}
-                                        </p>
-
-                                        <p className="break-all mb-4 text-sm">
-                                            <Phone className="bg-green-300 p-1 rounded-sm text-green-800 inline-block mr-2" />
-                                            {branch.branch_phone}
-                                        </p>
-                                        <address>
-                                            <a href={`https://${branch.branch_email}`} target="blank" className="break-all text-sm text-blue-500">
-                                                <Mail className="bg-green-300 p-1 rounded-sm text-green-800 inline-block mr-2" />
-                                                {branch.branch_email}
-                                            </a>
-                                        </address>
-                                    </div>
-                                </div>
-                            )
-                        })}
-
-                    </div>
-                </div>
-                <div>
-                    <div className="">
-                        <h1 className=" 
-                            text-green-300/70
-                            text-2xl
-                            sm:text-3xl
-                            font-bold
-                        ">
-                            DOWNLOAD FORMS
-                        </h1>
-                        <div className="
-                            grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
-                            gap-4
-                            mt-7
-                        ">
-                            {documents && (
-                                documents.data.map((document) => {
-                                    return (
-                                        <a
-                                        key={document.document_id}
-                                        href={route('documents.download', {
-                                            document: document.document_id
-                                        })}
+                        <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {branches && (
+                                branches.map((branch) => (
+                                    <div
+                                        key={branch.branch_id}
                                         className="
-                                            group
-                                            inline-flex
-                                            items-center
-                                            justify-center
-                                            gap-2
-                                            rounded-lg
-                                            border
-                                            border-green-700/40
-                                            bg-green-800/40
-                                            px-4
-                                            py-2
-                                            text-green-100
+                                            rounded-xl
+                                            border border-green-700/40
+                                            bg-green-800/20
+                                            p-4
                                             shadow-md
-                                            transition-all
-                                            duration-300
-                                            hover:-translate-y-1
-                                            hover:bg-green-800/60
-                                            hover:shadow-lg
+                                            transition-colors duration-200
+                                            hover:bg-green-800/40
                                         "
-                                        >
-                                            {document.document_name}
+                                    >
+                                        <h3 className="text-base sm:text-lg font-semibold text-green-300">
+                                            {branch.branch_name}
+                                        </h3>
 
-                                            <Download
-                                                className="
-                                                    text-orange-500
-                                                    transition-transform
-                                                    duration-300
-                                                    group-hover:scale-110
-                                                "
-                                            />
-                                        </a>
-                                    )
-                                })
+                                        <div className="mt-3 space-y-2 text-sm text-green-100">
+                                            <p className="flex items-start gap-2">
+                                                <Building2 className="mt-0.5 h-4 w-4 shrink-0 rounded-sm bg-green-300 p-0.5 text-green-800" />
+                                                <span className="leading-snug">
+                                                    {branch.branch_address}
+                                                </span>
+                                            </p>
+
+                                            <p className="flex items-start gap-2">
+                                                <Phone className="mt-0.5 h-4 w-4 shrink-0 rounded-sm bg-green-300 p-0.5 text-green-800" />
+                                                <a
+                                                    href={`tel:${branch.branch_phone}`}
+                                                    className="leading-snug text-green-100 hover:text-green-300 transition-colors"
+                                                >
+                                                    {branch.branch_phone}
+                                                </a>
+                                            </p>
+
+                                            <p className="flex items-start gap-2">
+                                                <Mail className="mt-0.5 h-4 w-4 shrink-0 rounded-sm bg-green-300 p-0.5 text-green-800" />
+                                                <a
+                                                    href={`mailto:${branch.branch_email}`}
+                                                    className="min-w-0 break-words leading-snug text-green-100 hover:text-green-300 transition-colors"
+                                                >
+                                                    {branch.branch_email}
+                                                </a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))
                             )}
                         </div>
-                        <div className="mt-7">
-                            <h1
-                            className=" 
-                                text-green-300/70
-                                text-lg
-                                font-bold
-                            "
+                    </section>
+                    <div className="space-y-10">
+                        <section>
+                            <h2 className="text-xl sm:text-2xl font-bold tracking-wide text-green-300/80">
+                                Download Forms
+                            </h2>
+
+                            <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                {documents && (
+                                    documents.map((document) => (
+                                        <a
+                                            key={document.document_id}
+                                            href={route("documents.download", {
+                                                document: document.document_id,
+                                            })}
+                                            className="
+                                                group
+                                                inline-flex items-center justify-between gap-3
+                                                rounded-lg
+                                                border border-green-700/40
+                                                bg-green-800/40
+                                                px-4 py-3
+                                                text-sm
+                                                text-green-100
+                                                shadow-md
+                                                transition-colors duration-200
+                                                hover:bg-green-800/60
+                                            "
+                                        >
+                                            <span className="min-w-0 truncate">
+                                                {document.document_name}
+                                            </span>
+                                            <Download className="h-4 w-4 shrink-0 text-orange-500 transition-transform duration-200 group-hover:scale-110" />
+                                        </a>
+                                    ))
+                                )}
+                            </div>
+                        </section>
+                        <section>
+                            <h2 className="text-xl sm:text-2xl font-bold tracking-wide text-green-300/80">
+                                Quick Summary
+                            </h2>
+
+                            <div
+                                className="
+                                    mt-6
+                                    grid grid-cols-3 gap-3
+                                    rounded-lg
+                                    border border-green-700/40
+                                    bg-green-800/40
+                                    p-4
+                                    text-center
+                                "
                             >
-                                QUICK SUMMARY
-                            </h1>
-                        </div>
-                        <div
-                            className="
-                            grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
-                            gap-4
-                            mt-4
-                            bg-green-800/40
-                            text-green-100
-                            rounded-lg
-                            p-2
-                            transition-all
-                            duration-300
-                            hover:-translate-y-1
-                            border
-                            border-green-700/40
-                            text-center
-                            "
-                        >
-                           <div>
-                                <h1 
-                                    className="
-                                    text-orange-500
-                                    text-lg
-                                    font-bold
-                                    "
-                                >
-                                    Our Members
-                                </h1>
-                                <h3>64656</h3>
-                            </div> 
-                           <div>
-                                <h1
-                                    className="
-                                    text-orange-500
-                                    text-lg
-                                    font-bold
-                                    "
-                                >
-                                    Projects
-                                </h1>
-                                <h3>10</h3>
-                            </div> 
-                           <div>
-                                <h1
-                                    className="
-                                    text-orange-500
-                                    text-lg
-                                    font-bold
-                                    "
-                                >
-                                    Partners
-                                </h1>
-                                <h3>12</h3>
-                            </div> 
-                        </div>
+                                <div>
+                                    <p className="text-orange-500 text-base sm:text-lg font-bold">
+                                        Our Members
+                                    </p>
+                                    <p className="mt-1 text-sm sm:text-base text-green-100">
+                                        64,656
+                                    </p>
+                                </div>
+                                <div>
+                                    <p className="text-orange-500 text-base sm:text-lg font-bold">
+                                        Projects
+                                    </p>
+                                    <p className="mt-1 text-sm sm:text-base text-green-100">
+                                        10
+                                    </p>
+                                </div>
+                                <div>
+                                    <p className="text-orange-500 text-base sm:text-lg font-bold">
+                                        Partners
+                                    </p>
+                                    <p className="mt-1 text-sm sm:text-base text-green-100">
+                                        12
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
                     </div>
                 </div>
             </div>

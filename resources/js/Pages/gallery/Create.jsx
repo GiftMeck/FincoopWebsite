@@ -1,6 +1,7 @@
 import { useForm, usePage, Link } from "@inertiajs/react";
 import Popup from "@/Components/Popup";
-export default function Create({users=[], branches=[], services=[], partners=[]}) {
+export default function Create() {
+    const {users, branches, services, partners} = usePage().props;
     const { data, setData, post, processing, errors } = useForm({
         gallery_title: '',
         gallery_description: '',
@@ -71,7 +72,7 @@ export default function Create({users=[], branches=[], services=[], partners=[]}
                         >
                             <option value="">Select users</option>
 
-                            {users.map((user) => (
+                            {users.data.map((user) => (
                                 <option key={user.id} value={user.id}>
                                     {user.name}
                                 </option>
@@ -92,7 +93,7 @@ export default function Create({users=[], branches=[], services=[], partners=[]}
                         >
                             <option value="">Select Service</option>
 
-                            {services.map((service) => (
+                            {services.data.map((service) => (
                                 <option key={service.service_id} value={service.service_id}>
                                     {service.service_name}
                                 </option>
@@ -113,7 +114,7 @@ export default function Create({users=[], branches=[], services=[], partners=[]}
                         >
                             <option value="">Select Partner</option>
 
-                            {partners.map((partner) => (
+                            {partners.data.map((partner) => (
                                 <option key={partner.partner_id} value={partner.partner_id}>
                                     {partner.partner_name}
                                 </option>
@@ -143,7 +144,7 @@ export default function Create({users=[], branches=[], services=[], partners=[]}
                         {errors.gallery_video && <div>{errors.gallery_video}</div>}
                     </div>
                     <button className="bg-green-700 text-white rounded p-2" type="submit" disabled={processing}>
-                        Create
+                        {processing ? 'Processing...' : 'Create'}
                     </button>
                 </form>
             </div>

@@ -1,8 +1,6 @@
 import { useForm, usePage, Link } from "@inertiajs/react";
-export default function Create() {
+export default function Create({customers, partners}) {
     const {flash} = usePage().props;
-    const partners = usePage().props.partners ?? [];
-    const customers = usePage().props.customers ?? [];
     const { data, setData, post, processing, errors } = useForm({
         testimonial_title: '',
         testimonial_content: '',
@@ -17,8 +15,8 @@ export default function Create() {
     };
 
     return (
-        <div className="p-6 flex justify-center items-center h-screen">
-            <div className="bg-gray-100 rounded shadow-md p-8 flex flex-col w-full max-w-md">
+        <div className="p-6 flex justify-center items-center h-full">
+            <div className="bg-gray-100 rounded shadow-md p-6 flex flex-col w-full">
                 <h1 className="text-xl text-center font-semibold mb-4">Create Testimonials</h1>
                 <form onSubmit={submit}>
                     <div className="mb-4 flex flex-col">
@@ -58,7 +56,7 @@ export default function Create() {
                         >
                             <option value="">Select customer</option>
 
-                            {customers.map((customer) => (
+                            {customers.data.map((customer) => (
                                 <option key={customer.customer_id} value={customer.customer_id}>
                                     {customer.customer_name}
                                 </option>
@@ -79,7 +77,7 @@ export default function Create() {
                         >
                             <option value="">Select partner</option>
 
-                            {partners.map((partner) => (
+                            {partners.data.map((partner) => (
                                 <option key={partner.partner_id} value={partner.partner_id}>
                                     {partner.partner_name}
                                 </option>
