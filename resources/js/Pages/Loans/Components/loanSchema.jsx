@@ -20,7 +20,7 @@ const optionalNumber = z.preprocess(
 export const loanSchema = z.object({
     account_number: z
         .string()
-        .optional(),
+        .min(1, "Account number is required"),
 
     employment_number: z
         .string()

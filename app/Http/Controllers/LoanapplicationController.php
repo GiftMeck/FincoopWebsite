@@ -22,12 +22,16 @@ class LoanapplicationController extends Controller
     {
         $validated = $request->validate([
 
-            'account_number' => [
-                'nullable',
+                'account_number' => [
+                'required',
                 'string',
-                'max:255',
+                'exists:accounts,account_number',
+                function ($attribute, $value, $fail) {
+                    if (\App\Models\loanapplication::hasActiveLoanFor($value)) {
+                        $fail('This account already has a loan application in progress. Please wait until it is completed or rejected.');
+                    }
+                },
             ],
-
             'employment_number' => [
                 'nullable',
                 'string',
@@ -258,6 +262,9 @@ class LoanapplicationController extends Controller
                 'nullable',
                 'date',
             ],
+        ], [
+            'account_number.required' => 'Please provide your account number.',
+            'account_number.exists' => 'The account number you entered does not exist in our records. Please check and try again.',
         ]);
 
 

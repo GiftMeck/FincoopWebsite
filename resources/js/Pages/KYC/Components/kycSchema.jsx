@@ -19,7 +19,7 @@ export const membershipSchema = z.object({
     */
     member_sacco_number: z
         .string()
-        .optional(),
+        .min(1, "Member Sacco number is required"),
 
     member_phone_number: z
         .string()

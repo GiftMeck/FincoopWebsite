@@ -7,6 +7,7 @@ import useLoanReactHookForm from './Components/reactHookForm';
 import { steps } from './Components/loanSteps';
 import { stepFields } from './Components/stepFields';
 import TextField from '@/Components/TextField';
+import AccountNumberField from '@/Components/AccountNumberField';
 import TextareaField from "@/Components/TextareaField";
 import SelectField from "@/Components/SelectField";
 import CheckboxField from "@/Components/CheckboxField";
@@ -51,62 +52,52 @@ export default function Create() {
     */
 
     const nextStep = async () => {
+        const fields = stepFields[currentStep];
 
-        const fields =
-            stepFields[
-                currentStep
-            ];
+        // 1. Run react-hook-form validation for this step's fields
+        let isValid = await form.trigger(fields);
 
+        // 2. If this step contains the account number, force a fresh
+        //    verification so a stale "valid" state can't slip through.
+        if (currentStep === 1 && fields.includes("account_number")) {
+            const value = form.getValues("account_number");
+            try {
+                const res = await fetch(
+                    `/accounts/verify?account_number=${encodeURIComponent((value ?? "").trim())}`,
+                    {
+                        headers: {
+                            Accept: "application/json",
+                            "X-Requested-With": "XMLHttpRequest",
+                        },
+                    }
+                );
 
-        const isValid =
-            await form.trigger(
-                fields
-            );
-
-
-        if (isValid) {
-
-            setCurrentStep(
-                (current) =>
-                    Math.min(
-                        current + 1,
-                        5
-                    )
-            );
-
-            window.scrollTo({
-                top: 0,
-                behavior: "smooth",
-            });
-
-        } else {
-
-            /*
-            Scroll to the first invalid field
-            */
-
-            setTimeout(() => {
-
-                const firstError =
-                    document.querySelector(
-                        '[aria-invalid="true"]'
-                    );
-
-                if (firstError) {
-
-                    firstError.scrollIntoView({
-                        behavior: "smooth",
-                        block: "center",
+                if (res.status === 404) {
+                    form.setError("account_number", {
+                        type: "manual",
+                        message: "This account number does not exist in our records.",
                     });
-
-                    firstError.focus?.();
-
+                    isValid = false;
+                } else if (res.ok) {
+                    form.clearErrors("account_number");
                 }
-
-            }, 100);
-
+            } catch {
+                // network error: leave existing validation state alone
+            }
         }
 
+        if (isValid) {
+            setCurrentStep((current) => Math.min(current + 1, 5));
+            window.scrollTo({ top: 0, behavior: "smooth" });
+        } else {
+            setTimeout(() => {
+                const firstError = document.querySelector('[aria-invalid="true"]');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: "smooth", block: "center" });
+                    firstError.focus?.();
+                }
+            }, 100);
+        }
     };
 
 
@@ -639,12 +630,12 @@ export default function Create() {
                                     md:grid-cols-2
                                 ">
 
-                                        <TextField
-                                            Controller={Controller}
+                                        <AccountNumberField
                                             form={form}
                                             name="account_number"
                                             label="Account No."
                                             placeholder="Enter account number"
+                                            blockActiveLoan={true}
                                         />
 
                                         <TextField

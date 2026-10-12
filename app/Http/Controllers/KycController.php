@@ -197,7 +197,7 @@ class KycController extends Controller
     {
         $rules = [
             // Personal Details
-            'member_sacco_number' => 'nullable|string|max:100',
+            'member_sacco_number' => 'required|string|max:100|exists:accounts,account_number',
             'member_phone_number' => 'required|string|max:20',
             'id_type' => 'required|string|in:national_id,passport,drivers_license',
             'id_number' => 'required|string|max:100',
@@ -240,7 +240,12 @@ class KycController extends Controller
             'verification_notes' => 'nullable|string|max:1000',
         ];
 
-        return Validator::make($request->all(), $rules);
+        $messages = [
+            'member_sacco_number.required' => 'Please provide your Member Sacco (account) number.',
+            'member_sacco_number.exists' => 'The Member Sacco (account) number you entered does not exist in our records. Please check and try again.',
+        ];
+
+        return Validator::make($request->all(), $rules, $messages);
     }
 
     /**

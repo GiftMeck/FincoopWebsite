@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, usePage } from "@inertiajs/react";
 import ApplicationLogo from "@/Components/ApplicationLogo";
 import Popup from "@/Components/Popup";
+import GlobalSearch from "@/Components/GlobalSearch";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 
@@ -177,6 +178,9 @@ export default function NavBar({ scrolled, ActionSource }) {
                             ))}
                         </ul>
                     </div>
+
+                    {/* SEARCH (visible on all screen sizes) */}
+                    <GlobalSearch scrolled={scrolled} />
 
                     {/* MOBILE HAMBURGER */}
                     <button

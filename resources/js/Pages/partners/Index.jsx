@@ -4,13 +4,6 @@ import { useState } from "react";
 import {usePage, useForm, Link} from "@inertiajs/react";
 export default function Index({partners, onEdit}) {
     const ActionSource = usePage().props.ActionSource;
-    /*
-    const deletePartner = (e, partner) => {
-            e.preventDefault();
-            console.log(partner);
-            //post(route("partners.destroy", partner.partner_id));
-        };
-    */
     return (
         <>
             <div className="h-full bg-gray-100 shadow-md w-full flex flex-col border p-4">

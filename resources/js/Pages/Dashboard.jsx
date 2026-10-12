@@ -23,6 +23,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, router, usePage } from '@inertiajs/react';
 import { useState, useEffect, useRef } from 'react';
 import FinancialBenefits from './financialBenefits/Index';
+import AccountsDashboard from './accounts/AccountsDashboard';
 export const tabs = [
         {
             key: 'serviceCategories',
@@ -38,6 +39,11 @@ export const tabs = [
             key: 'documents',
             label: 'DOCUMENTS',
             prop: 'documents'
+        },
+        {
+            key: 'accounts',
+            label: 'ACCOUNTS',
+            prop: 'accounts'
         },
         {
             key: 'projects',
@@ -186,6 +192,7 @@ export default function Dashboard() {
                             {activeTab === 'FINANCIAL BENEFITS' && <FinancialBenefitsDashboard />}
                             {activeTab === 'ADVERTS' && <VertsDashboard verts={usePage().props?.verts} />}
                             {activeTab === 'DOCUMENTS' && <DocumentsDashboard />}
+                            {activeTab === 'ACCOUNTS' && <AccountsDashboard />}
                             {activeTab === 'MEMBERSHIP APPLICATIONS' && <Membership />}
                             {activeTab === 'KYC' && <KYC />}
                             {activeTab === 'GROUP MEMBERSHIP APPLICATIONS' && <GroupMembership />}

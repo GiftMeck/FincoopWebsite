@@ -91,4 +91,30 @@ class LoanApplication extends Model
             'liabilities' => 'array',
         ];
     }
+       /**
+     * Statuses that count as an active/running loan.
+     * Only "rejected" allows a new application for the same account.
+     */
+    public const ACTIVE_STATUSES = ['pending', 'under_review', 'approved'];
+
+    /**
+     * Does the given account number currently have a loan in progress?
+     *
+     * Case-insensitive and whitespace-tolerant, because the account_number
+     * is stored as a free-form nullable string.
+     */
+    public static function hasActiveLoanFor(?string $accountNumber): bool
+    {
+        $normalized = strtolower(trim((string) $accountNumber));
+
+        if ($normalized === '') {
+            return false;
+        }
+
+        return static::query()
+            ->whereNotNull('account_number')
+            ->whereRaw('LOWER(TRIM(account_number)) = ?', [$normalized])
+            ->whereIn('status', self::ACTIVE_STATUSES)
+            ->exists();
+    }
 }

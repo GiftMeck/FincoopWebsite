@@ -6,6 +6,7 @@ import UseKYCInertiaForm from "./Components/kycInertiaForm";
 import { stepFields } from "./Components/kycStepFields";
 import { steps } from "./Components/kycSteps";
 import TextField from '@/Components/TextField';
+import AccountNumberField from '@/Components/AccountNumberField';
 import SelectField from "@/Components/SelectField";
 import CheckboxField from "@/Components/CheckboxField";
 import SectionHeader from "@/Components/SectionHeader";
@@ -472,7 +473,7 @@ export default function Create() {
                                         gap-6
                                         md:grid-cols-2
                                     ">
-                                        <TextField
+                                        <AccountNumberField
                                             Controller={Controller}
                                             form={form}
                                             name="member_sacco_number"

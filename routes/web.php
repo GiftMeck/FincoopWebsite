@@ -24,8 +24,14 @@ use App\Http\Controllers\MembershipController;
 use App\Http\Controllers\MobileBankingApplicationController;
 use App\Http\Controllers\KycController;
 use App\Http\Controllers\GroupMembershipController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\AccountController;
 use App\Http\Resources\CustomerResource;
 use Inertia\Inertia;
+
+// Global site search (JSON endpoint used by the navbar search box)
+Route::get('/search', SearchController::class)->name('search');
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'serviceCategories' => fn() => \App\Models\serviceCategory::all()
@@ -64,6 +70,7 @@ Route::get('/dashboard', function () {
             'groupMembershipApplications' => fn() => App\Models\GroupMembership::paginate(4),
             'loanApplications' => fn() => App\Models\LoanApplication::paginate(4),
             'mobileBankingApplications' => fn() => App\Models\MobileBankingApplication::paginate(4),
+            'accounts' => fn() => App\Models\Account::paginate(4),
         ]
     );
 })->middleware(['auth', 'verified'])->name('dashboard');
@@ -431,6 +438,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+// Member accounts (imported from Excel) + account-number validation.
+// The verify endpoint is public so loan/KYC applicants (including guests)
+// can validate their account number before submitting.
+Route::get('/accounts/verify', [AccountController::class, 'verify'])->name('accounts.verify');
+Route::middleware('auth')->group(function () {
+    Route::get('/accounts', [AccountController::class, 'index'])->name('accounts.index');
+    Route::post('/accounts', [AccountController::class, 'store'])->name('accounts.store');
+    Route::get('/accounts/template', [AccountController::class, 'template'])->name('accounts.template');
+    Route::delete('/accounts/{account}', [AccountController::class, 'destroy'])->name('accounts.destroy');
 });
 Route::prefix('loanapplications')->name('loanapplications.')->group(function () {
     Route::get('/', [loanapplicationController::class, 'create'])->name('create');
